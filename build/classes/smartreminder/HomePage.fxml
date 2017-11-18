@@ -418,6 +418,7 @@
                </font>
             </Label>
             <ListView fx:id="friend_list" layoutX="85.0" layoutY="40.0" onMouseClicked="#dubbleClickedFriendList" prefHeight="152.0" prefWidth="192.0" />
+            <ListView fx:id="searchedUser_list" layoutX="57.0" layoutY="276.0" prefHeight="200.0" prefWidth="257.0" />
             <TextField fx:id="idFriend_field" layoutX="57.0" layoutY="239.0" prefHeight="31.0" prefWidth="192.0" promptText="Username" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="192.0" prefHeight="47.0" prefWidth="192.0" text="Add Friend" textAlignment="CENTER" textFill="#656161">
                <font>
@@ -429,7 +430,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="269.0" prefHeight="47.0" prefWidth="314.0" text="_____________________" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="453.0" prefHeight="47.0" prefWidth="314.0" text="_____________________" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>

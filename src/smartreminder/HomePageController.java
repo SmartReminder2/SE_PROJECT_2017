@@ -61,6 +61,7 @@ public class HomePageController implements Initializable {
     
     // friendList_name load form database
     static ObservableList<String> friendList_name = FXCollections.observableArrayList ("ShinAh", "JaeHa","Sesshomaru", "Kaneki","Tatsuya", "Miyuki"); 
+    static ObservableList<String> userNameList = FXCollections.observableArrayList();
     private Label month_label;
     @FXML
     private GridPane calendarPane;
@@ -266,6 +267,8 @@ public class HomePageController implements Initializable {
     private Menu username_menu;
     
     public static Menu tmpUsernameMenu;
+    @FXML
+    private ListView<String> searchedUser_list;
  
     /**
      * Initializes the controller class.
@@ -302,6 +305,7 @@ public class HomePageController implements Initializable {
    {  
        //Set Friend List
         friend_list.setItems(friendList_name);  
+        
        //Generate Calendar
         Calendar c = Calendar.getInstance();
         month = c.get(Calendar.MONTH);
@@ -392,9 +396,8 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void addFriend(ActionEvent event) {
-        String anotherUsername = idFriend_field.getText();
-        // check in database if have this id fill to friendList_name
-        friendList_name.add(anotherUsername);
+        userNameList.addAll(SmartReminder.myFriendServices.searchNewFriend(idFriend_field.getText()));
+        friend_list.setItems(userNameList);
     }
 
     @FXML
