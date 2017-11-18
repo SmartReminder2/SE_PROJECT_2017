@@ -67,9 +67,9 @@ public class Test {
             System.out.println("Member" + (i+1) + ": " + list.get(i).getUserName());
         }
         
-        FriendCatalogue friendList = FriendCatalogue.getInstance();
-        friendList.add(user2);
-        friendList.add(user3);
+        FriendServices friendList = FriendServices.getInstance();
+        //friendList.add(user2);
+        //friendList.add(user3);
         
         list = friendList.getFriendList();
         for(int i = 0; i < list.size(); i++) {
