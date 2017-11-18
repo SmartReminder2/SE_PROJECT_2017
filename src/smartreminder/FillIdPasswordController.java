@@ -127,6 +127,7 @@ public class FillIdPasswordController implements Initializable {
                 HomePageController.tmpUsernameMenu.setText(SmartReminder.myAccount.getUserName());
                 System.out.println(HomePageController.tmpUsernameMenu.getText());
                 System.out.println("Login Successfully!!");
+                HomePageController.updateFriendList();
                 SmartReminder.primaryStage.getScene().setRoot(SmartReminder.homePage);
                 return;
             }

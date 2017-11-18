@@ -309,11 +309,6 @@ public class HomePageController implements Initializable {
      
     void setInit()
     {  
-        friendList_name.clear();
-        ArrayList<UserAccount> accountList = SmartReminder.myFriendServices.getFriendList();
-        for (int i = 0; i < accountList.size(); i++) {
-           friendList_name.add(accountList.get(i).getUserName());
-        }
        
        //Set Friend List
         friend_list.setItems(friendList_name);  
@@ -394,11 +389,11 @@ public class HomePageController implements Initializable {
         }
     }
     
-    private void updateFriendList() {
+    public static void updateFriendList() {
         friendList_name.clear();
-        ArrayList<UserAccount> accountList = SmartReminder.myFriendServices.getFriendList();
+        ArrayList<Friend> accountList = SmartReminder.myFriendServices.getFriendList();
         for (int i = 0; i < accountList.size(); i++) {
-           friendList_name.add(accountList.get(i).getUserName());
+           friendList_name.add(accountList.get(i).getFriendAccount().getUserName());
         }
     }
 
