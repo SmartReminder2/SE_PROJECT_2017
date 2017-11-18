@@ -411,7 +411,7 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void addFriend(ActionEvent event) {
-        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchNewFriend(searchedUser_list.getSelectionModel().getSelectedItem());
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(searchedUser_list.getSelectionModel().getSelectedItem());
         Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
         SmartReminder.myFriendServices.add(fnd);
         updateFriendList();
@@ -419,26 +419,29 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void dubbleClickedFriendList(MouseEvent event) {
-        if(event.getClickCount() > 1){
-            select_Friendname = friend_list.getSelectionModel().getSelectedItem();
-            nameDelete_label.setText(select_Friendname); 
-            deleteFriend_pane.setVisible(true);
+        if (!friend_list.getSelectionModel().isEmpty()) {
+            if(event.getClickCount() > 1){
+                select_Friendname = friend_list.getSelectionModel().getSelectedItem();
+                nameDelete_label.setText(select_Friendname); 
+                deleteFriend_pane.setVisible(true);
+            }
         }
+        
     }
 
     @FXML
     private void deleteFriend(ActionEvent event) {
-        int count=0;
-        for(String name : friendList_name){
-            if(name.equals(select_Friendname))
-            {
-                friendList_name.remove(count);
-                friend_list.setItems(friendList_name);  
-                break;
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(select_Friendname);
+        ArrayList<Friend> friendList = SmartReminder.myFriendServices.getFriendList();
+        for (int i = 0; i < friendList.size(); i++) {
+            if (friendList.get(i).getFriendAccount().getId() == userList.get(0).getId()) {
+                SmartReminder.myFriendServices.delete(friendList.get(i));
+                friendList_name.remove(select_Friendname);
+                updateFriendList();
+                deleteFriend_pane.setVisible(false);
+                System.out.println(friendList.get(i).getFriendAccount().getUserName() + " is deleted");
             }
-            count++;
         }
-        deleteFriend_pane.setVisible(false);
     }
 
     @FXML
@@ -498,7 +501,7 @@ public class HomePageController implements Initializable {
     @FXML
     private void searchUser(ActionEvent event) {
         userNameList.clear();
-        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchNewFriend(idFriend_field.getText());
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(idFriend_field.getText());
         for (int i = 0; i < userList.size(); i++) {
             userNameList.add(userList.get(i).getUserName());
         }

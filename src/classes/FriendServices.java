@@ -79,7 +79,7 @@ public class FriendServices {
         friendList.remove(friend);
     }
     
-    public ArrayList searchNewFriend(String userName) {
+    public ArrayList searchUser(String userName) {
         
         ArrayList<UserAccount> returnList = new ArrayList<>();
         
