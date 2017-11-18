@@ -64,7 +64,7 @@ public class HomePageController implements Initializable {
     ObservableList<String> list2 = FXCollections.observableArrayList("January","February","March","April","May","June","July","August","September","October","November","December");
     
     // friendList_name load form database
-    static ObservableList<String> friendList_name = FXCollections.observableArrayList ("ShinAh", "JaeHa","Sesshomaru", "Kaneki","Tatsuya", "Miyuki"); 
+    static ObservableList<String> friendList_name = FXCollections.observableArrayList (); 
     static ObservableList<String> userNameList = FXCollections.observableArrayList();
     private Label month_label;
     @FXML
@@ -307,8 +307,14 @@ public class HomePageController implements Initializable {
         generateCalendar(--month,year);
     }
      
-   void setInit()
-   {  
+    void setInit()
+    {  
+        friendList_name.clear();
+        ArrayList<UserAccount> accountList = SmartReminder.myFriendServices.getFriendList();
+        for (int i = 0; i < accountList.size(); i++) {
+           friendList_name.add(accountList.get(i).getUserName());
+        }
+       
        //Set Friend List
         friend_list.setItems(friendList_name);  
         
@@ -325,8 +331,8 @@ public class HomePageController implements Initializable {
         year_list.setValue(year);
         String date = "Today is "+current_day+" / "+defaultMonth+" / "+year ;
         label_Today.setText(date);
-   }
-   void generateCalendar(int month,int year){
+    }
+    void generateCalendar(int month,int year){
        
         int count_day = 1;
         int rectangle_loop = 1;
@@ -387,6 +393,14 @@ public class HomePageController implements Initializable {
             }
         }
     }
+    
+    private void updateFriendList() {
+        friendList_name.clear();
+        ArrayList<UserAccount> accountList = SmartReminder.myFriendServices.getFriendList();
+        for (int i = 0; i < accountList.size(); i++) {
+           friendList_name.add(accountList.get(i).getUserName());
+        }
+    }
 
     @FXML
     private void signOut(ActionEvent event) {
@@ -405,6 +419,7 @@ public class HomePageController implements Initializable {
         ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchNewFriend(searchedUser_list.getSelectionModel().getSelectedItem());
         Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
         SmartReminder.myFriendServices.add(fnd);
+        updateFriendList();
     }
 
     @FXML
