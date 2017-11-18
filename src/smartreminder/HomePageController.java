@@ -6,10 +6,13 @@
 package smartreminder;
 
 
+import classes.Friend;
+import classes.UserAccount;
 import java.net.URL;
 
 import java.text.DateFormatSymbols;
 import java.time.Month;
+import java.util.ArrayList;
 
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -30,6 +33,7 @@ import java.util.Date;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
@@ -269,6 +273,8 @@ public class HomePageController implements Initializable {
     public static Menu tmpUsernameMenu;
     @FXML
     private ListView<String> searchedUser_list;
+    @FXML
+    private Button addFndBtn;
  
     /**
      * Initializes the controller class.
@@ -396,8 +402,9 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void addFriend(ActionEvent event) {
-        userNameList.addAll(SmartReminder.myFriendServices.searchNewFriend(idFriend_field.getText()));
-        friend_list.setItems(userNameList);
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchNewFriend(searchedUser_list.getSelectionModel().getSelectedItem());
+        Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
+        SmartReminder.myFriendServices.add(fnd);
     }
 
     @FXML
@@ -476,6 +483,18 @@ public class HomePageController implements Initializable {
             }
         }
            
+    }
+
+    @FXML
+    private void searchUser(ActionEvent event) {
+        userNameList.clear();
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchNewFriend(idFriend_field.getText());
+        for (int i = 0; i < userList.size(); i++) {
+            userNameList.add(userList.get(i).getUserName());
+        }
+        
+        searchedUser_list.setItems(userNameList);
+        
     }
 
 }

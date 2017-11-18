@@ -418,19 +418,20 @@
                </font>
             </Label>
             <ListView fx:id="friend_list" layoutX="85.0" layoutY="40.0" onMouseClicked="#dubbleClickedFriendList" prefHeight="152.0" prefWidth="192.0" />
-            <ListView fx:id="searchedUser_list" layoutX="57.0" layoutY="276.0" prefHeight="200.0" prefWidth="257.0" />
+            <ListView fx:id="searchedUser_list" layoutX="57.0" layoutY="276.0" prefHeight="152.0" prefWidth="257.0" />
             <TextField fx:id="idFriend_field" layoutX="57.0" layoutY="239.0" prefHeight="31.0" prefWidth="192.0" promptText="Username" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="192.0" prefHeight="47.0" prefWidth="192.0" text="Add Friend" textAlignment="CENTER" textFill="#656161">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Button layoutX="252.0" layoutY="239.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="31.0" prefWidth="62.0" text="Add">
+            <Button layoutX="252.0" layoutY="239.0" mnemonicParsing="false" onAction="#searchUser" prefHeight="31.0" prefWidth="62.0" text="Search">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="453.0" prefHeight="47.0" prefWidth="314.0" text="_____________________" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="addFndBtn" layoutX="146.0" layoutY="438.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="31.0" prefWidth="68.0" text="Add" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="469.0" prefHeight="47.0" prefWidth="314.0" text="_____________________" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>

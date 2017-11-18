@@ -60,6 +60,7 @@ public class FriendServices {
             em.close();
 
             friendList.add(friend);
+            System.out.println("Adding friend success!!");
         }
         else {
             System.out.println("This friend, \"" + friend.getFriendAccount().getUserName() + "\"," + " is already exist");
