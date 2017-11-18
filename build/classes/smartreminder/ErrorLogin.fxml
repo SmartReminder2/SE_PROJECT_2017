@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartreminder.ErrorLoginController">
+   <children>
+      <Pane layoutY="7.0" prefHeight="560.0" prefWidth="560.0">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="481.0" layoutX="15.0" layoutY="40.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="3.0" width="526.0" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="205.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/incorrect.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="201.0" layoutY="432.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #8c8c80;" text="Back" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Tw Cen MT" size="23.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="122.0" layoutY="50.0" prefHeight="104.0" prefWidth="304.0" text=" Login Failed" textFill="#514c4c">
+               <font>
+                  <Font name="Tw Cen MT" size="55.0" />
+               </font>
+            </Label>
+            <Label layoutX="113.0" layoutY="94.0" prefHeight="20.0" prefWidth="361.0" text="____________" textFill="#c9c6c6">
+               <font>
+                  <Font name="Tw Cen MT" size="55.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="86.0" layoutY="307.0" prefHeight="93.0" prefWidth="406.0" text="Incorrect username or password !!" textAlignment="CENTER" textFill="#c32525">
+               <font>
+                  <Font name="Tw Cen MT" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
