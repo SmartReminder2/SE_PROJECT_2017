@@ -102,7 +102,43 @@ public class FriendServices {
     }
     
     public ArrayList getFriendList() {
+        ArrayList<Friend> list = new ArrayList<>();
+        for (int i = 0; i < friendList.size(); i++) {
+            if (friendList.get(i).getMyAccount().getId() == SmartReminder.myAccount.getId()) {
+                list.add(friendList.get(i));
+            }
+        }
+        return list;
+    }
+    
+    public ArrayList getFriendRequestList() {
+        
+        ArrayList<String> list = new ArrayList<>();
+        
+        EntityManager em = SmartReminder.emf.createEntityManager();
+        // Store 1000 Point objects in the database:
+        em.getTransaction().begin();
+        TypedQuery<Friend> query = em.createQuery("SELECT fnd FROM Friend fnd", Friend.class);
+        List<Friend> allFndList = query.getResultList();
+        em.close();
+        
+        boolean check = true;
+        for (int i = 0; i < allFndList.size(); i++) {
+            if (allFndList.get(i).getFriendAccount().getId() == SmartReminder.myAccount.getId()) {
+                for (int j = 0; j < friendList.size(); j++) {
+                    if (friendList.get(j).getFriendAccount().getId() == allFndList.get(i).getMyAccount().getId()) {
+                        check = false;
+                        break;
+                    }
+                }
+                if (check) {
+                    list.add(allFndList.get(i).getMyAccount().getUserName());
+                    check = true;
+                }
+                
+            }
             
-        return (ArrayList)friendList;
+        }
+        return list;
     }
 }

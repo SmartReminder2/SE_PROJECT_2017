@@ -7,6 +7,8 @@ package smartreminder;
 
 
 import classes.Friend;
+import classes.FriendServices;
+import classes.PersonalCalendar;
 import classes.UserAccount;
 import java.net.URL;
 
@@ -66,6 +68,7 @@ public class HomePageController implements Initializable {
     // friendList_name load form database
     static ObservableList<String> friendList_name = FXCollections.observableArrayList (); 
     static ObservableList<String> userNameList = FXCollections.observableArrayList();
+    static ObservableList<String> friendReqNameList = FXCollections.observableArrayList();
     private Label month_label;
     @FXML
     private GridPane calendarPane;
@@ -276,7 +279,7 @@ public class HomePageController implements Initializable {
     @FXML
     private Button addFndBtn;
     @FXML
-    private ListView<?> friendRequest_list;
+    private ListView<String> friendRequest_list;
     @FXML
     private Button acceptBtn;
     @FXML
@@ -317,7 +320,9 @@ public class HomePageController implements Initializable {
     {  
        
        //Set Friend List
-        friend_list.setItems(friendList_name);  
+        friend_list.setItems(friendList_name);
+        searchedUser_list.setItems(userNameList);
+        friendRequest_list.setItems(friendReqNameList);
         
        //Generate Calendar
         Calendar c = Calendar.getInstance();
@@ -402,10 +407,27 @@ public class HomePageController implements Initializable {
            friendList_name.add(accountList.get(i).getFriendAccount().getUserName());
         }
     }
+    
+    public static void updateSearchedUserList() {
+        userNameList.clear();
+    }
+    
+    public static void updateFriendRequest() {
+        friendReqNameList.clear();
+        ArrayList<String> nameList = SmartReminder.myFriendServices.getFriendRequestList();
+        for (int i = 0; i < nameList.size(); i++) {
+            friendReqNameList.add(nameList.get(i));
+        }
+    }
 
     @FXML
     private void signOut(ActionEvent event) {
-        setInit();
+        //setInit();
+        SmartReminder.myAccount = new UserAccount();
+        friendList_name.clear();
+        friendReqNameList.clear();
+        friend_list.setItems(friendList_name);
+        friendRequest_list.setItems(friendReqNameList);
         FillIdPasswordController.changeid_field.setText("");
         FillIdPasswordController.changpassword_field.setText("");
         SmartReminder.secondaryPane.getChildren().clear();
@@ -511,9 +533,6 @@ public class HomePageController implements Initializable {
         for (int i = 0; i < userList.size(); i++) {
             userNameList.add(userList.get(i).getUserName());
         }
-        
-        searchedUser_list.setItems(userNameList);
-        
     }
 
     @FXML
