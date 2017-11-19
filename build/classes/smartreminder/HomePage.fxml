@@ -388,7 +388,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ComboBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="121.0" prefHeight="47.0" prefWidth="178.0" text="Month" textAlignment="CENTER" textFill="#656161">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="121.0" prefHeight="47.0" prefWidth="178.0" text="Month" textAlignment="CENTER" textFill="#656161">
                <font>
                   <Font name="Tw Cen MT Bold" size="22.0" />
                </font>
