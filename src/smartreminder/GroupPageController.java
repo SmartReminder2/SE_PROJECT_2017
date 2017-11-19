@@ -58,12 +58,13 @@ public class GroupPageController implements Initializable {
     @FXML
     private Label nameDelete_label1;
     
-    @FXML
     private ListView<String> friendinGroup_list;
      @FXML
     private ListView<String> friend_list;
     @FXML
     private ListView<String> group_list;
+    @FXML
+    private ListView<?> friendInGroup_list;
 
     /**
      * Initializes the controller class.
