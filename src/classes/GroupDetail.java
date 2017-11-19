@@ -21,14 +21,14 @@ public class GroupDetail implements Serializable {
     private long id;
     
     private String GroupName;
-    private long createrId;
+    private UserAccount createrAccount;
 
     public GroupDetail() {
     }
 
-    public GroupDetail(String GroupName, long createrId) {
+    public GroupDetail(String GroupName, UserAccount createrId) {
         this.GroupName = GroupName;
-        this.createrId = createrId;
+        this.createrAccount = createrId;
     }
 
     public void setGroupName(String GroupName) {
@@ -43,7 +43,7 @@ public class GroupDetail implements Serializable {
         return GroupName;
     }
 
-    public long getCreaterId() {
-        return createrId;
+    public UserAccount getCreaterAccount() {
+        return createrAccount;
     }
 }

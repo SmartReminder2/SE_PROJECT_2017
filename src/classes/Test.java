@@ -53,7 +53,7 @@ public class Test {
         myCalendar.addSchedule(sch2);
         myCalendar.showSchedule();
         
-        GroupDetail group1 = new GroupDetail("SmartReminder", user1.getId());
+        GroupDetail group1 = new GroupDetail("SmartReminder", user1);
         GroupCatalogue groupList = GroupCatalogue.getInstance();
         groupList.add(user2, group1);
         groupList.add(user3, group1);
