@@ -275,6 +275,12 @@ public class HomePageController implements Initializable {
     private ListView<String> searchedUser_list;
     @FXML
     private Button addFndBtn;
+    @FXML
+    private ListView<?> friendRequest_list;
+    @FXML
+    private Button acceptBtn;
+    @FXML
+    private Button DeclineBtn;
  
     /**
      * Initializes the controller class.
@@ -508,6 +514,14 @@ public class HomePageController implements Initializable {
         
         searchedUser_list.setItems(userNameList);
         
+    }
+
+    @FXML
+    private void acceptFriendRequest(ActionEvent event) {
+    }
+
+    @FXML
+    private void declineFriendRequest(ActionEvent event) {
     }
 
 }
