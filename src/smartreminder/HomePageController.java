@@ -537,6 +537,11 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void acceptFriendRequest(ActionEvent event) {
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(friendRequest_list.getSelectionModel().getSelectedItem());
+        Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
+        SmartReminder.myFriendServices.add(fnd);
+        updateFriendList();
+        updateFriendRequest();
     }
 
     @FXML

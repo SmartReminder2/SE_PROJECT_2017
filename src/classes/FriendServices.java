@@ -45,7 +45,7 @@ public class FriendServices {
         boolean isValid = true;
         
         for (int i = 0; i < friendList.size(); i++) {
-            if (friendList.get(i).getFriendAccount().getId() == friend.getFriendAccount().getId()) {
+            if ( (friendList.get(i).getMyAccount().getId() == friend.getMyAccount().getId()) && (friendList.get(i).getFriendAccount().getId() == friend.getFriendAccount().getId()) ) {
                 isValid = false;
                 break;
             }
@@ -114,30 +114,23 @@ public class FriendServices {
     public ArrayList getFriendRequestList() {
         
         ArrayList<String> list = new ArrayList<>();
-        
-        EntityManager em = SmartReminder.emf.createEntityManager();
-        // Store 1000 Point objects in the database:
-        em.getTransaction().begin();
-        TypedQuery<Friend> query = em.createQuery("SELECT fnd FROM Friend fnd", Friend.class);
-        List<Friend> allFndList = query.getResultList();
-        em.close();
+        ArrayList<Friend> myFndList = getFriendList();
         
         boolean check = true;
-        for (int i = 0; i < allFndList.size(); i++) {
-            if (allFndList.get(i).getFriendAccount().getId() == SmartReminder.myAccount.getId()) {
-                for (int j = 0; j < friendList.size(); j++) {
-                    if (friendList.get(j).getFriendAccount().getId() == allFndList.get(i).getMyAccount().getId()) {
+        for (int i = 0; i < friendList.size(); i++) {
+            if (friendList.get(i).getFriendAccount().getId() == SmartReminder.myAccount.getId()) {
+                for (int j = 0; j < myFndList.size(); j++) {
+                    if (myFndList.get(j).getFriendAccount().getId() == friendList.get(i).getMyAccount().getId()) {
                         check = false;
                         break;
                     }
                 }
                 if (check) {
-                    list.add(allFndList.get(i).getMyAccount().getUserName());
-                    check = true;
+                    list.add(friendList.get(i).getMyAccount().getUserName());
                 }
                 
             }
-            
+            check = true;
         }
         return list;
     }
