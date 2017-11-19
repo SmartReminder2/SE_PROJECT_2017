@@ -6,10 +6,15 @@
 package smartreminder;
 
 
+import classes.Friend;
+import classes.FriendServices;
+import classes.PersonalCalendar;
+import classes.UserAccount;
 import java.net.URL;
 
 import java.text.DateFormatSymbols;
 import java.time.Month;
+import java.util.ArrayList;
 
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -30,6 +35,7 @@ import java.util.Date;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
@@ -60,7 +66,9 @@ public class HomePageController implements Initializable {
     ObservableList<String> list2 = FXCollections.observableArrayList("January","February","March","April","May","June","July","August","September","October","November","December");
     
     // friendList_name load form database
-    static ObservableList<String> friendList_name = FXCollections.observableArrayList ("ShinAh", "JaeHa","Sesshomaru", "Kaneki","Tatsuya", "Miyuki"); 
+    static ObservableList<String> friendList_name = FXCollections.observableArrayList (); 
+    static ObservableList<String> userNameList = FXCollections.observableArrayList();
+    static ObservableList<String> friendReqNameList = FXCollections.observableArrayList();
     private Label month_label;
     @FXML
     private GridPane calendarPane;
@@ -266,6 +274,16 @@ public class HomePageController implements Initializable {
     private Menu username_menu;
     
     public static Menu tmpUsernameMenu;
+    @FXML
+    private ListView<String> searchedUser_list;
+    @FXML
+    private Button addFndBtn;
+    @FXML
+    private ListView<String> friendRequest_list;
+    @FXML
+    private Button acceptBtn;
+    @FXML
+    private Button DeclineBtn;
  
     /**
      * Initializes the controller class.
@@ -298,10 +316,14 @@ public class HomePageController implements Initializable {
         generateCalendar(--month,year);
     }
      
-   void setInit()
-   {  
+    void setInit()
+    {  
+       
        //Set Friend List
-        friend_list.setItems(friendList_name);  
+        friend_list.setItems(friendList_name);
+        searchedUser_list.setItems(userNameList);
+        friendRequest_list.setItems(friendReqNameList);
+        
        //Generate Calendar
         Calendar c = Calendar.getInstance();
         month = c.get(Calendar.MONTH);
@@ -315,8 +337,8 @@ public class HomePageController implements Initializable {
         year_list.setValue(year);
         String date = "Today is "+current_day+" / "+defaultMonth+" / "+year ;
         label_Today.setText(date);
-   }
-   void generateCalendar(int month,int year){
+    }
+    void generateCalendar(int month,int year){
        
         int count_day = 1;
         int rectangle_loop = 1;
@@ -377,10 +399,35 @@ public class HomePageController implements Initializable {
             }
         }
     }
+    
+    public static void updateFriendList() {
+        friendList_name.clear();
+        ArrayList<Friend> accountList = SmartReminder.myFriendServices.getFriendList();
+        for (int i = 0; i < accountList.size(); i++) {
+           friendList_name.add(accountList.get(i).getFriendAccount().getUserName());
+        }
+    }
+    
+    public static void updateSearchedUserList() {
+        userNameList.clear();
+    }
+    
+    public static void updateFriendRequest() {
+        friendReqNameList.clear();
+        ArrayList<String> nameList = SmartReminder.myFriendServices.getFriendRequestList();
+        for (int i = 0; i < nameList.size(); i++) {
+            friendReqNameList.add(nameList.get(i));
+        }
+    }
 
     @FXML
     private void signOut(ActionEvent event) {
-        setInit();
+        //setInit();
+        SmartReminder.myAccount = new UserAccount();
+        friendList_name.clear();
+        friendReqNameList.clear();
+        friend_list.setItems(friendList_name);
+        friendRequest_list.setItems(friendReqNameList);
         FillIdPasswordController.changeid_field.setText("");
         FillIdPasswordController.changpassword_field.setText("");
         SmartReminder.secondaryPane.getChildren().clear();
@@ -392,33 +439,37 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void addFriend(ActionEvent event) {
-        String anotherUsername = idFriend_field.getText();
-        // check in database if have this id fill to friendList_name
-        friendList_name.add(anotherUsername);
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(searchedUser_list.getSelectionModel().getSelectedItem());
+        Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
+        SmartReminder.myFriendServices.add(fnd);
+        updateFriendList();
     }
 
     @FXML
     private void dubbleClickedFriendList(MouseEvent event) {
-        if(event.getClickCount() > 1){
-            select_Friendname = friend_list.getSelectionModel().getSelectedItem();
-            nameDelete_label.setText(select_Friendname); 
-            deleteFriend_pane.setVisible(true);
+        if (!friend_list.getSelectionModel().isEmpty()) {
+            if(event.getClickCount() > 1){
+                select_Friendname = friend_list.getSelectionModel().getSelectedItem();
+                nameDelete_label.setText(select_Friendname); 
+                deleteFriend_pane.setVisible(true);
+            }
         }
+        
     }
 
     @FXML
     private void deleteFriend(ActionEvent event) {
-        int count=0;
-        for(String name : friendList_name){
-            if(name.equals(select_Friendname))
-            {
-                friendList_name.remove(count);
-                friend_list.setItems(friendList_name);  
-                break;
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(select_Friendname);
+        ArrayList<Friend> friendList = SmartReminder.myFriendServices.getFriendList();
+        for (int i = 0; i < friendList.size(); i++) {
+            if (friendList.get(i).getFriendAccount().getId() == userList.get(0).getId()) {
+                SmartReminder.myFriendServices.delete(friendList.get(i));
+                friendList_name.remove(select_Friendname);
+                updateFriendList();
+                deleteFriend_pane.setVisible(false);
+                System.out.println(friendList.get(i).getFriendAccount().getUserName() + " is deleted");
             }
-            count++;
         }
-        deleteFriend_pane.setVisible(false);
     }
 
     @FXML
@@ -473,6 +524,28 @@ public class HomePageController implements Initializable {
             }
         }
            
+    }
+
+    @FXML
+    private void searchUser(ActionEvent event) {
+        userNameList.clear();
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(idFriend_field.getText());
+        for (int i = 0; i < userList.size(); i++) {
+            userNameList.add(userList.get(i).getUserName());
+        }
+    }
+
+    @FXML
+    private void acceptFriendRequest(ActionEvent event) {
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(friendRequest_list.getSelectionModel().getSelectedItem());
+        Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
+        SmartReminder.myFriendServices.add(fnd);
+        updateFriendList();
+        updateFriendRequest();
+    }
+
+    @FXML
+    private void declineFriendRequest(ActionEvent event) {
     }
 
 }

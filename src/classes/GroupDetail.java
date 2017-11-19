@@ -5,45 +5,32 @@
  */
 package classes;
 
-import java.io.Serializable;
-import javax.persistence.*;
-
 /**
  *
  * @author kan
  */
-@Entity
-public class GroupDetail implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+public class GroupDetail{
     
     private String GroupName;
-    private long createrId;
+    private UserAccount createrAccount;
 
     public GroupDetail() {
     }
 
-    public GroupDetail(String GroupName, long createrId) {
+    public GroupDetail(String GroupName, UserAccount createrId) {
         this.GroupName = GroupName;
-        this.createrId = createrId;
+        this.createrAccount = createrId;
     }
 
     public void setGroupName(String GroupName) {
         this.GroupName = GroupName;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public String getGroupName() {
         return GroupName;
     }
 
-    public long getCreaterId() {
-        return createrId;
+    public UserAccount getCreaterAccount() {
+        return createrAccount;
     }
 }

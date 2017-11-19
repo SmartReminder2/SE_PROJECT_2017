@@ -53,12 +53,12 @@ public class Test {
         myCalendar.addSchedule(sch2);
         myCalendar.showSchedule();
         
-        GroupDetail group1 = new GroupDetail("SmartReminder", user1.getId());
+        /*GroupDetail group1 = new GroupDetail("SmartReminder", user1);
         GroupCatalogue groupList = GroupCatalogue.getInstance();
         groupList.add(user2, group1);
         groupList.add(user3, group1);
         
-        System.out.println("GroupID: " + group1.getId());
+        //System.out.println("GroupID: " + group1.getId());
         
         ArrayList<UserAccount> list = new ArrayList<>();
         list = groupList.getAllUser(group1);
@@ -67,14 +67,14 @@ public class Test {
             System.out.println("Member" + (i+1) + ": " + list.get(i).getUserName());
         }
         
-        FriendCatalogue friendList = FriendCatalogue.getInstance();
-        friendList.add(user2);
-        friendList.add(user3);
+        FriendServices friendList = FriendServices.getInstance();
+        //friendList.add(user2);
+        //friendList.add(user3);
         
         list = friendList.getFriendList();
         for(int i = 0; i < list.size(); i++) {
             System.out.println("Friend" + (i+1) + ": " + list.get(i).getUserName());
-        }
+        }*/
         
         // Open a database connection
         // (create a new database if it doesn't exist yet):
@@ -112,14 +112,14 @@ public class Test {
         // Close the database connection:
         em.close();
         
-        EntityManager em2 = emf.createEntityManager();
+        /*EntityManager em2 = emf.createEntityManager();
         em2.getTransaction().begin();
         
         em2.persist(group1);
                 
         em2.getTransaction().commit();
         
-        em2.close();
+        em2.close();*/
         
         emf.close();
         
