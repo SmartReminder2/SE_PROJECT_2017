@@ -5,20 +5,11 @@
  */
 package classes;
 
-import java.io.Serializable;
-import javax.persistence.*;
-
 /**
  *
  * @author kan
  */
-@Entity
-public class GroupDetail implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+public class GroupDetail{
     
     private String GroupName;
     private UserAccount createrAccount;
@@ -33,10 +24,6 @@ public class GroupDetail implements Serializable {
 
     public void setGroupName(String GroupName) {
         this.GroupName = GroupName;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getGroupName() {

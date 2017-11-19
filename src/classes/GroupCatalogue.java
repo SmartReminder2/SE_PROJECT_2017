@@ -6,25 +6,34 @@
 package classes;
 
 import java.util.ArrayList;
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author kan
  */
-public class GroupCatalogue {
+
+@Entity
+public class GroupCatalogue implements Serializable {
     
-    private static GroupCatalogue instance = new GroupCatalogue();
+    private static final long serialVersionUID = 1L;
+
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id;
     
-    private ArrayList<UserAccount> userList = new ArrayList<>();
-    private ArrayList<GroupDetail> groupList = new ArrayList<>();
+    private UserAccount userAccount;
+    private GroupDetail groupDetail;
     
     private GroupCatalogue(){}
-    
-    public static GroupCatalogue getInstance(){
-        return instance;
+
+    public GroupCatalogue(UserAccount userAccount, GroupDetail groupDetail) {
+        this.userAccount = userAccount;
+        this.groupDetail = groupDetail;
     }
     
-    public void add(UserAccount user, GroupDetail group) {
+    
+    /*public void add(UserAccount user, GroupDetail group) {
         userList.add(user);
         groupList.add(group);
     }
@@ -45,5 +54,18 @@ public class GroupCatalogue {
         }
             
         return list;
+    }*/
+
+    public long getId() {
+        return id;
     }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public GroupDetail getGroupDetail() {
+        return groupDetail;
+    }
+    
 }
