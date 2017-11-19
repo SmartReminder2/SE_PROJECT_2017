@@ -65,6 +65,14 @@ public class GroupServices {
     }
     
     public void delete(GroupCatalogue groupCat) {
+        EntityManager em = SmartReminder.emf.createEntityManager();
+        GroupCatalogue gCat = em.find(GroupCatalogue.class, groupCat.getId());
+ 
+        em.getTransaction().begin();
+        em.remove(gCat);
+        em.getTransaction().commit();
+        // Close the database connection:
+        em.close();
         groupList.remove(groupCat);
     }
     
