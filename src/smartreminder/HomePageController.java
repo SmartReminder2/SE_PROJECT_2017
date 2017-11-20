@@ -499,8 +499,9 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void groupMenu(ActionEvent event) {
-        setPane(SmartReminder.groupPage);
+        GroupPageController.updateGroupList();
         setInit();
+        setPane(SmartReminder.groupPage);
     }
 
     @FXML

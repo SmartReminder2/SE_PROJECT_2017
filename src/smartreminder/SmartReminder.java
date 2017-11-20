@@ -6,6 +6,7 @@
 package smartreminder;
 
 import classes.FriendServices;
+import classes.GroupServices;
 import classes.PersonalCalendar;
 import classes.UserAccount;
 import java.util.Date;
@@ -41,6 +42,7 @@ public class SmartReminder extends Application {
     public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
     public static PersonalCalendar myCalendar = PersonalCalendar.getInstance();
     public static FriendServices myFriendServices = FriendServices.getInstance();
+    public static GroupServices myGroupServices = GroupServices.getInstance();
     public static UserAccount myAccount;
     public static Date beginTime;
     public static Date finishTime;

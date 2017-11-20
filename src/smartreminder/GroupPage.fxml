@@ -32,7 +32,7 @@
                      </font>
                   </Label>
                   <ListView fx:id="group_list" layoutX="57.0" layoutY="276.0" onMouseClicked="#onClickedGroupList" prefHeight="105.0" prefWidth="208.0" />
-                  <Button layoutX="233.0" layoutY="169.0" mnemonicParsing="false" onAction="#addGroup" prefHeight="31.0" prefWidth="62.0" text="Add">
+                  <Button layoutX="233.0" layoutY="169.0" mnemonicParsing="false" onAction="#createGroup" prefHeight="31.0" prefWidth="62.0" text="Create">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -48,7 +48,7 @@
                         <Font name="Tw Cen MT" size="17.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="241.0" prefHeight="47.0" prefWidth="293.0" text="(Click to select/Double click to Delete)" textAlignment="CENTER" textFill="#656161">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="247.0" prefHeight="31.0" prefWidth="293.0" text="(Click to select/Double click to Delete)" textAlignment="CENTER" textFill="#656161">
                      <font>
                         <Font name="Tw Cen MT" size="17.0" />
                      </font>
@@ -115,7 +115,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="nameDelete_label" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="57.0" prefHeight="40.0" prefWidth="178.0" text="Baka" textAlignment="CENTER">
+            <Label fx:id="groupNameDelete_label" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="57.0" prefHeight="40.0" prefWidth="178.0" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -140,7 +140,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="nameDelete_label1" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="57.0" prefHeight="40.0" prefWidth="178.0" text="Baka" textAlignment="CENTER">
+            <Label fx:id="FndInGpNameDelete_label" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="57.0" prefHeight="40.0" prefWidth="178.0" text="Baka" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
