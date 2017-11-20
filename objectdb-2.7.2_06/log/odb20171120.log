@@ -232,3 +232,69 @@ Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objec
 [2017-11-20 13:42:10 #3 store] 
 Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 5688@kan-PC
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-20 15:36:07 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 3724@kan-PC
+
+[2017-11-20 15:36:07 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-20 15:37:15 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 3724@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-20 15:51:01 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 5392@kan-PC
+
+[2017-11-20 15:51:01 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-20 15:51:16 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 5392@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-20 17:03:36 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 5948@kan-PC
+
+[2017-11-20 17:03:36 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-20 17:09:39 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 5948@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-20 17:12:56 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 6176@kan-PC
+
+[2017-11-20 17:12:56 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-20 17:14:02 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 6176@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-20 17:29:10 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 6772@kan-PC
+
+[2017-11-20 17:29:10 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-20 17:29:28 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 6772@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-20 17:32:02 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 6628@kan-PC
+
+[2017-11-20 17:32:02 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-20 17:32:15 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 6628@kan-PC
+

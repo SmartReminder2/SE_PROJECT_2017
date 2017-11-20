@@ -42,51 +42,51 @@ public class GroupServices {
         
         boolean isValid = true;
         
-        for (int i = 0; i < groupList.size(); i++) {
-            if ( (groupList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
-                (groupList.get(i).getGroupDetail().getCreaterAccount().getId() == SmartReminder.myAccount.getId())
-                ) {
-                isValid = false;
-                break;
+        if (groupName.matches("[a-zA-Z0-9]+")) {
+            for (int i = 0; i < groupList.size(); i++) {
+                if ( (groupList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
+                    (groupList.get(i).getGroupDetail().getCreaterAccount().getId() == SmartReminder.myAccount.getId())
+                    ) {
+                    isValid = false;
+                    break;
+                }
+            }
+            if (isValid) {
+                GroupDetail newGroup = new GroupDetail(groupName, SmartReminder.myAccount);
+                EntityManager em = SmartReminder.emf.createEntityManager();
+                em.getTransaction().begin();
+                em.persist(newGroup);
+                em.getTransaction().commit();
+                // Close the database connection:
+                em.close();
+
+                GroupMember newMember = new GroupMember(SmartReminder.myAccount, newGroup);
+                em = SmartReminder.emf.createEntityManager();
+                em.getTransaction().begin();
+                em.persist(newMember);
+                em.getTransaction().commit();
+                // Close the database connection:
+                em.close();
+                groupList.add(newMember);
+                System.out.println("Creating group success!!");
+            }
+            else {
+                System.out.println("This group's name is used.");
             }
         }
-        if (isValid) {
-            GroupDetail newGroup = new GroupDetail(groupName, SmartReminder.myAccount);
-            EntityManager em = SmartReminder.emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(newGroup);
-            em.getTransaction().commit();
-            // Close the database connection:
-            em.close();
-            
-            GroupMember newMember = new GroupMember(SmartReminder.myAccount, newGroup);
-            em = SmartReminder.emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(newMember);
-            em.getTransaction().commit();
-            // Close the database connection:
-            em.close();
-            groupList.add(newMember);
-            System.out.println("Creating group success!!");
-        }
         else {
-            System.out.println("This group's name is used.");
+            System.out.println("Invalid group's name");
         }
+        
+        
         
     }
     
-    public void delete(String groupName) {
-        GroupDetail group = null;
-        ArrayList<GroupMember> list = getMyGroupList();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getGroupDetail().getGroupName().equals(groupName)) {
-                group = list.get(i).getGroupDetail();
-                break;
-            }
-        }
+    public void delete(String groupName, String createrUserName) {
         
-        if ( (group != null) && group.getCreaterAccount().getId() == SmartReminder.myAccount.getId()) {
-            ArrayList<GroupMember> members = getMembers(group);
+        
+        if (createrUserName.equals(SmartReminder.myAccount.getUserName())) {
+            ArrayList<GroupMember> members = getMembers(groupName, createrUserName);
             for (int i = 0; i < members.size(); i++) {
                 EntityManager em = SmartReminder.emf.createEntityManager();
                 GroupMember gMem = em.find(GroupMember.class, members.get(i).getId());
@@ -97,7 +97,15 @@ public class GroupServices {
                 em.close();
                 groupList.remove(members.get(i));
             }
-
+            GroupDetail group = new GroupDetail();
+            for (int i = 0; i < groupList.size(); i++) {
+                if ( (groupList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
+                    (groupList.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(createrUserName)) 
+                ) {
+                    group = groupList.get(i).getGroupDetail();
+                }
+            }
+            
             EntityManager em = SmartReminder.emf.createEntityManager();
             GroupDetail g = em.find(GroupDetail.class, group.getId());
             em.getTransaction().begin();
@@ -118,26 +126,22 @@ public class GroupServices {
         
         boolean isValid = true;
         
-        long createrId = 0;
-        
-        ArrayList<Friend> list = SmartReminder.myFriendServices.getFriendList();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getFriendAccount().getUserName().equals(createrUserName)) {
-                createrId = list.get(i).getFriendAccount().getId();
-            }
-        }
-        
         GroupDetail group = null;
         ArrayList<GroupMember> gList = getMyGroupList();
         for (int i = 0; i < gList.size(); i++) {
             if ( (gList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
-                (gList.get(i).getGroupDetail().getCreaterAccount().getId() == createrId) 
-                ) {
+                (gList.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(createrUserName)) 
+            ) {
                 group = gList.get(i).getGroupDetail();
-                if (gList.get(i).getUserAccount().getUserName().equals(userName)) {
-                    isValid = false;
-                    break;
+                ArrayList<GroupMember> memberList = getMembers(group.getGroupName(), group.getCreaterAccount().getUserName());
+                for (int j = 0; j < memberList.size(); j++) {
+                    System.out.println(memberList.get(j).getUserAccount().getUserName() + " " + userName);
+                    if (memberList.get(j).getUserAccount().getUserName().equals(userName)) {
+                        isValid = false;
+                        break;
+                    }
                 }
+                
             }
         }
         
@@ -177,10 +181,13 @@ public class GroupServices {
         return list;
     }
     
-    public ArrayList getMembers(GroupDetail group) {
+    public ArrayList getMembers(String groupName, String createrUserName) {
         ArrayList<GroupMember> members = new ArrayList<>();
         for (int i = 0; i < groupList.size(); i++) {
-            if (groupList.get(i).getGroupDetail().getId() == group.getId()) {
+            //System.out.println(groupList.get(i).getGroupDetail().getCreaterAccount() + " " + createrUserName);
+            if ( (groupList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
+                (groupList.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(createrUserName)) 
+                ) {
                 members.add(groupList.get(i));
             }
             
