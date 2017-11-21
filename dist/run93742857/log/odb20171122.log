@@ -1,0 +1,23 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-22 00:25:01 #1 store] 
+Database 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' is opened by 3656@DESKTOP-ELH9RTE
+
+[2017-11-22 00:25:01 #2 store] 
+Configuration path: ?
+
+[2017-11-22 00:25:01 #3 type] 
+Type classes.UserAccount is not enhanced.
+
+[2017-11-22 00:25:01 #4 type] 
+Type classes.Schedule is not enhanced.
+
+[2017-11-22 00:25:01 #5 type] 
+Type classes.Friend is not enhanced.
+
+[2017-11-22 00:25:01 #6 type] 
+Type classes.GroupMember is not enhanced.
+
+[2017-11-22 00:25:01 #7 type] 
+Type classes.GroupDetail is not enhanced.
+

@@ -1,0 +1,94 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-21 22:14:38 #1 explorer] 
+[ObjectDB 2.7.2_06] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.d(MSG.java:64)
+	at com.objectdb.o.LFL.F(LFL.java:930)
+	at com.objectdb.o.LFL.C(LFL.java:887)
+	at com.objectdb.o.LFL.C(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DocManager.<init>(DocManager.java:25)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.aO(MST.java:109)
+	at com.objectdb.o.MSF.Vi(MSF.java:190)
+	at com.objectdb.o.OMF.an(OMF.java:783)
+	at com.objectdb.jpa.EMF.an(EMF.java:131)
+	at com.objectdb.o.OMF.am(OMF.java:694)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:150)
+	... 17 more
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-21 22:14:52 #1 explorer] 
+[ObjectDB 2.7.2_06] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$500(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.d(MSG.java:64)
+	at com.objectdb.o.LFL.F(LFL.java:930)
+	at com.objectdb.o.LFL.C(LFL.java:887)
+	at com.objectdb.o.LFL.C(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DocManager.<init>(DocManager.java:25)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.aO(MST.java:109)
+	at com.objectdb.o.MSF.Vi(MSF.java:190)
+	at com.objectdb.o.OMF.an(OMF.java:783)
+	at com.objectdb.jpa.EMF.an(EMF.java:131)
+	at com.objectdb.o.OMF.am(OMF.java:694)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:150)
+	... 17 more
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-21 22:14:58 #1 store] 
+Database 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' is opened by 1600@DESKTOP-ELH9RTE
+
+[2017-11-21 22:14:58 #2 store] 
+Configuration path: C:\Users\58010622\Desktop\SE-Project\SmartReminder\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-21 22:16:22 #3 store] 
+Database 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' is closed by 1600@DESKTOP-ELH9RTE
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-21 22:25:45 #1 store] 
+Database 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' is opened by 8096@DESKTOP-ELH9RTE
+
+[2017-11-21 22:25:45 #2 store] 
+Configuration path: C:\Users\58010622\Desktop\SE-Project\SmartReminder\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-21 22:26:27 #3 store] 
+Database 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' is closed by 8096@DESKTOP-ELH9RTE
+

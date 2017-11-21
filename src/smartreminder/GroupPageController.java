@@ -37,12 +37,6 @@ public class GroupPageController implements Initializable {
     private Pane friendListPane;
     @FXML
     private TextField groupName;
-    @FXML
-    private Pane selectCal_Pane;
-    @FXML
-    private ComboBox<?> year_list;
-    @FXML
-    private ComboBox<?> month_list;
     
     static public ListView<String> tmpFriend_list;
     static public ListView<String> tmpFriendInGroup_list;
@@ -226,13 +220,6 @@ public class GroupPageController implements Initializable {
         }
     }    
     
-    @FXML
-    private void list_Action(ActionEvent event) {
-    }
-
-    @FXML
-    private void mlist_Action(ActionEvent event) {
-    }
     
     @FXML
     private void createGroup(ActionEvent event) {

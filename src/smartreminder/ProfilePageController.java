@@ -59,19 +59,12 @@ public class ProfilePageController implements Initializable {
     }   
     static void setInit()
     {   
-        username =  FillIdPasswordController.username;  
-        img = imageViewTemp.getImage();
-        if(username.equals("moira"))
-        {
-            img = new Image("file:src/Image/moira.jpg");
-        }
-        else if(username.equals("umaru"))
-        {
-            img = new Image("file:src/Image/umaru.jpg");
-        }
- 
+        img = new Image("file:src/Image/umaru.jpg");
         imageProfileTemp.setFill(new ImagePattern(img));
-        username_Temp.setText(username);
+    }
+    static void setUsername()
+    {
+        username_Temp.setText(SmartReminder.myAccount.getUserName());
     }
      
     

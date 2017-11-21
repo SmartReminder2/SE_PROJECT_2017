@@ -10,6 +10,7 @@ import classes.Friend;
 import classes.FriendServices;
 import classes.PersonalCalendar;
 import classes.UserAccount;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 
 import java.text.DateFormatSymbols;
@@ -41,12 +42,16 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import static smartreminder.FillIdPasswordController.username;
+import static smartreminder.ProfilePageController.username;
 
 /**
  * FXML Controller class
@@ -254,8 +259,6 @@ public class HomePageController implements Initializable {
     private Rectangle dayBlock42;
     private Label labelToday;
     @FXML
-    private Label label_Today;
-    @FXML
     private ListView<String> friend_list;
     @FXML
     private TextField idFriend_field;
@@ -264,7 +267,6 @@ public class HomePageController implements Initializable {
     String select_Friendname;
     @FXML
     private Pane main_pane;
-    @FXML
     private Pane selectCal_Pane;
     @FXML
     private Pane deleteFriend_pane;
@@ -277,19 +279,17 @@ public class HomePageController implements Initializable {
     @FXML
     private ListView<String> searchedUser_list;
     @FXML
-    private Button addFndBtn;
-    @FXML
     private ListView<String> friendRequest_list;
     @FXML
-    private Button acceptBtn;
+    private JFXButton showCurrentYear;
     @FXML
-    private Button DeclineBtn;
+    private JFXButton showCurrentMonth;
     @FXML
-    private Label labelDate;
+    private JFXButton showCurrenDate;
     @FXML
-    private Label labelMonth;
+    private Pane selectCalPane;
     @FXML
-    private Label labelYear;
+    private ImageView picLogout;
  
     /**
      * Initializes the controller class.
@@ -297,6 +297,9 @@ public class HomePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {  
         //year_list.setItem()
+        Image img = new Image("file:src/Image/logout.png");
+
+        picLogout.setImage(img);
         for (int i = 1900; i < 2100; i++) {
            list.add(i + "");
         }
@@ -305,7 +308,9 @@ public class HomePageController implements Initializable {
         month_list.setItems(list2); 
         SmartReminder.secondaryPane = main_pane;
         setInit();      
-        
+        showCurrentMonth.setText(defaultMonth.substring(0, 3));
+        showCurrentYear.setText(year+"");
+        showCurrenDate.setText(current_day+"");
     }
     
     @FXML
@@ -321,11 +326,12 @@ public class HomePageController implements Initializable {
         month = Month.valueOf(monthName.toUpperCase()).getValue();
         generateCalendar(--month,year);
     }
-     
+    String defaultMonth;
     void setInit()
     {  
        
        //Set Friend List
+         
         friend_list.setItems(friendList_name);
         searchedUser_list.setItems(userNameList);
         friendRequest_list.setItems(friendReqNameList);
@@ -337,12 +343,11 @@ public class HomePageController implements Initializable {
         year = c.get(Calendar.YEAR);
         current_year = year;
         current_month = month;
-        String defaultMonth = new DateFormatSymbols().getMonths()[month];
+        defaultMonth = new DateFormatSymbols().getMonths()[month];
         generateCalendar(month,year);
         month_list.setValue(defaultMonth);
         year_list.setValue(year);
-        String date = "Today is "+current_day+" / "+defaultMonth+" / "+year ;
-        label_Today.setText(date);
+  
     }
     void generateCalendar(int month,int year){
        
@@ -437,7 +442,6 @@ public class HomePageController implements Initializable {
         FillIdPasswordController.changeid_field.setText("");
         FillIdPasswordController.changpassword_field.setText("");
         SmartReminder.secondaryPane.getChildren().clear();
-        selectCal_Pane.setVisible(true);
         friendListPane.setVisible(true);
         SmartReminder.primaryStage.getScene().setRoot(SmartReminder.loginPage);
        
@@ -445,10 +449,16 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void addFriend(ActionEvent event) {
-        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(searchedUser_list.getSelectionModel().getSelectedItem());
-        Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
-        SmartReminder.myFriendServices.add(fnd);
-        updateFriendList();
+         //  System.out.println("55555555555555555555555");
+        if(!idFriend_field.getText().equals("")){
+            ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(searchedUser_list.getSelectionModel().getSelectedItem());
+            System.out.println(userList.get(0));       
+            Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
+          //System.out.println(fnd.toString());    
+            SmartReminder.myFriendServices.add(fnd);
+            updateFriendList();
+            System.out.println(userList.get(0));
+        }
     }
 
     @FXML
@@ -485,20 +495,20 @@ public class HomePageController implements Initializable {
     void setPane(Parent page)
     {
         SmartReminder.secondaryPane.getChildren().clear();
-        selectCal_Pane.setVisible(false);
         friendListPane.setVisible(false);
         SmartReminder.secondaryPane.getChildren().add(page);
     }
     @FXML
     private void profileMenu(ActionEvent event) {
         setPane(SmartReminder.profilePage); 
-        ProfilePageController.setInit();     
+        ProfilePageController.setInit();    
+        ProfilePageController.setUsername();
+           
     }
 
     @FXML
     private void personalMenu(ActionEvent event) {
         SmartReminder.secondaryPane.getChildren().clear();
-        selectCal_Pane.setVisible(true);
         friendListPane.setVisible(true);
         setInit();
     }

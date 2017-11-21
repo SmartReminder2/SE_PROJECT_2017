@@ -31,10 +31,6 @@ public class SignUpController implements Initializable {
 
     private TextField id_field;
     private PasswordField password_field;
-    @FXML
-    private Button signUp_buton;
-    @FXML
-    private Button back_button;
     
     public static String username;
     public static String password;
