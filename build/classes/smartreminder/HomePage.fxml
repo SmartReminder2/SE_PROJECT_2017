@@ -92,7 +92,7 @@
          <children>
             <JFXButton fx:id="showCurrentYear" layoutX="127.0" layoutY="3.0" prefHeight="47.0" prefWidth="57.0" style="-fx-background-color: #ebebeb;" text="       " />
             <JFXButton fx:id="showCurrentMonth" layoutX="67.0" layoutY="3.0" prefHeight="47.0" prefWidth="56.0" style="-fx-background-color: #ebebeb;" text="       " />
-            <JFXButton fx:id="showCurrenDate" layoutX="6.0" layoutY="3.0" prefHeight="47.0" prefWidth="57.0" style="-fx-background-color: #ebebeb;" text="       " />
+            <JFXButton fx:id="showCurrenDate" layoutX="6.0" layoutY="3.0" prefHeight="47.0" prefWidth="57.0" style="-fx-background-color: #ebebeb;" text="16   " />
          </children>
       </Pane>
       <GridPane fx:id="calendarPane" layoutX="398.0" layoutY="130.0" prefHeight="603.0" prefWidth="778.0">
@@ -418,7 +418,7 @@
       </GridPane>
       <Pane layoutX="-3.0" layoutY="-2.0" prefHeight="40.0" prefWidth="369.0">
          <children>
-            <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="244.0" style="-fx-background-color: #9dbee4;">
+            <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="244.0" style="-fx-background-color: #606161;">
               <menus>
                 <Menu mnemonicParsing="false" text="Feature">
                   <items>
@@ -431,7 +431,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </MenuBar>
-            <MenuBar layoutX="239.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="123.0" style="-fx-background-color: #9dbee4;">
+            <MenuBar layoutX="239.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="123.0" style="-fx-background-color: #606161;">
               <menus>
                 <Menu fx:id="username_menu" mnemonicParsing="false" text="Username">
                   <items>
@@ -445,24 +445,24 @@
             </MenuBar>
          </children>
       </Pane>
-      <Pane fx:id="selectCalPane" layoutX="671.0" layoutY="24.0" prefHeight="78.0" prefWidth="340.0">
+      <Pane fx:id="selectCalPane" layoutX="592.0" layoutY="24.0" prefHeight="78.0" prefWidth="528.0">
          <children>
-            <ComboBox fx:id="year_list" layoutX="24.0" layoutY="33.0" onAction="#list_Action" prefHeight="31.0" prefWidth="132.0" promptText="2017" style="-fx-background-color: #9dbee4;">
+            <ComboBox fx:id="year_list" layoutX="110.0" layoutY="33.0" onAction="#list_Action" prefHeight="31.0" prefWidth="132.0" promptText="2017" style="-fx-background-color: #ebebeb;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ComboBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="182.0" layoutY="-14.0" prefHeight="47.0" prefWidth="132.0" text="Month" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="251.0" layoutY="34.0" prefHeight="31.0" prefWidth="92.0" text="Month" textAlignment="CENTER" textFill="#606161">
                <font>
-                  <Font name="Tw Cen MT Bold" size="22.0" />
+                  <Font name="Tw Cen MT" size="21.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="-14.0" prefHeight="47.0" prefWidth="132.0" text="Year" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="6.0" layoutY="33.0" prefHeight="32.0" prefWidth="92.0" text="Year" textAlignment="CENTER" textFill="#606161">
                <font>
-                  <Font name="Tw Cen MT Bold" size="22.0" />
+                  <Font name="Tw Cen MT" size="21.0" />
                </font>
             </Label>
-            <ComboBox fx:id="month_list" layoutX="185.0" layoutY="33.0" onAction="#mlist_Action" prefHeight="31.0" prefWidth="132.0" promptText="2017" style="-fx-background-color: #9dbee4;">
+            <ComboBox fx:id="month_list" layoutX="350.0" layoutY="33.0" onAction="#mlist_Action" prefHeight="31.0" prefWidth="132.0" promptText="2017" style="-fx-background-color: #ebebeb;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

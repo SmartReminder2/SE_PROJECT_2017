@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
@@ -11,33 +12,33 @@
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartreminder.AddScheduleController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ade0e4" height="77.0" stroke="#f5f8f8" strokeType="INSIDE" width="1204.0" />
-      <Text fill="#fffefe" layoutX="440.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAILY SCHEDULE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#444445" height="774.0" stroke="#f5f8f8" strokeType="INSIDE" strokeWidth="0.0" width="1214.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#606161" height="77.0" stroke="#f5f8f8" strokeType="INSIDE" strokeWidth="0.0" width="1214.0" />
+      <Text fill="#fffefe" layoutX="445.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAILY SCHEDULE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <ListView layoutX="-2.0" layoutY="76.0" prefHeight="675.0" prefWidth="1206.0" />
-      <ScrollPane layoutY="76.0" prefHeight="714.0" prefWidth="1204.0">
+      <ScrollPane layoutX="105.0" layoutY="115.0" prefHeight="580.0" prefWidth="1005.0">
         <content>
-          <AnchorPane fx:id="timeTable_pane" minHeight="0.0" minWidth="0.0" prefHeight="3000.0" prefWidth="1196.0" />
+          <AnchorPane fx:id="timeTable_pane" minHeight="0.0" minWidth="0.0" prefHeight="3000.0" prefWidth="1000.0" />
         </content>
       </ScrollPane>
-      <Button layoutX="1061.0" layoutY="21.0" mnemonicParsing="false" onAction="#adding" prefHeight="36.0" prefWidth="121.0" style="-fx-background-color: #ffffff;" text="ADD" textFill="#4dcbf2">
+      <JFXButton layoutX="51.0" layoutY="19.0" onAction="#backBtn" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #9dbee4;" text="Back">
+         <font>
+            <Font name="Tw Cen MT" size="20.0" />
+         </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </JFXButton>
+      <JFXButton layoutX="1039.0" layoutY="19.0" onAction="#adding" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #9dbee4;" text="Add">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Tw Cen MT" size="20.0" />
          </font>
-      </Button>
-      <Button layoutX="21.0" layoutY="21.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="36.0" prefWidth="121.0" style="-fx-background-color: #ffffff;" text="BACK" textFill="#5bd3f2">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
+      </JFXButton>
    </children>
 </AnchorPane>

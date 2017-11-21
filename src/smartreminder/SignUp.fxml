@@ -66,6 +66,9 @@
                <font>
                   <Font name="Tw Cen MT Bold" size="19.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
          </children>
       </Pane>
@@ -104,6 +107,9 @@
          <font>
             <Font name="Tw Cen MT Bold" size="19.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
    </children>
 </AnchorPane>
