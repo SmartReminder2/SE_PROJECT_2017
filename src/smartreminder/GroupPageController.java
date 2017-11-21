@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -67,8 +68,8 @@ public class GroupPageController implements Initializable {
     private ListView<String> friendInGroup_list;
 
     static String select_GroupName;
-    static String select_Friendname;
-    static String select_listInGroup;
+    static String select_FriendName;
+    static String select_FriendInGroupName;
     ObservableList<String> friend_observableList;
     ArrayList friends;
     @FXML
@@ -106,22 +107,24 @@ public class GroupPageController implements Initializable {
     }
     @FXML
     private void onClickedGroupList(MouseEvent event) {
-        String[] str = tmpGroup_list.getSelectionModel().getSelectedItem().split(" by:");
-        System.out.println(str[0]);
-        System.out.println(str[str.length-1]);
-        select_GroupName = str[0];
-        createrUsername = str[str.length-1];
-                
-        ArrayList<Friend> fndList = SmartReminder.myFriendServices.getFriendList();
-        UserAccount account = null;
-        for (int i = 0; i < fndList.size(); i++) {
-            if (fndList.get(i).getFriendAccount().getUserName().equals(createrUsername)) {
-                account = fndList.get(i).getFriendAccount();
+        if (!tmpGroup_list.getSelectionModel().isEmpty()) {
+            String[] str = tmpGroup_list.getSelectionModel().getSelectedItem().split(" by:");
+            System.out.println(str[0]);
+            System.out.println(str[str.length-1]);
+            select_GroupName = str[0];
+            createrUsername = str[str.length-1];
+
+            ArrayList<Friend> fndList = SmartReminder.myFriendServices.getFriendList();
+            UserAccount account = null;
+            for (int i = 0; i < fndList.size(); i++) {
+                if (fndList.get(i).getFriendAccount().getUserName().equals(createrUsername)) {
+                    account = fndList.get(i).getFriendAccount();
+                }
             }
-        }
-        tmpGroupDetail = new GroupDetail(select_GroupName, account);
-        if (tmpGroupDetail != null) {
-            updateFriendInList();
+            tmpGroupDetail = new GroupDetail(select_GroupName, account);
+            if (tmpGroupDetail != null) {
+                updateFriendInList();
+            }
         }
         
         if(event.getClickCount() > 1){
@@ -159,7 +162,7 @@ public class GroupPageController implements Initializable {
     @FXML
     private void onClickedFriendList(MouseEvent event) {
         duplicateFriend = false;
-        select_Friendname = tmpFriend_list.getSelectionModel().getSelectedItem();
+        select_FriendName = tmpFriend_list.getSelectionModel().getSelectedItem();
         if(event.getClickCount() > 1){
             if (!tmpFriend_list.getSelectionModel().isEmpty() && tmpGroup_list.getSelectionModel().getSelectedItem() != null) {
                 /*String[] str = tmpGroup_list.getSelectionModel().getSelectedItem().split(" by:");
@@ -168,7 +171,7 @@ public class GroupPageController implements Initializable {
                 select_GroupName = str[0];
                 createrUsername = str[str.length-1];*/
                         
-                SmartReminder.myGroupServices.addMember(select_Friendname, select_GroupName, createrUsername);
+                SmartReminder.myGroupServices.addMember(select_FriendName, select_GroupName, createrUsername);
                 if (tmpGroupDetail != null) {
                     updateFriendInList();
                 }
@@ -176,7 +179,7 @@ public class GroupPageController implements Initializable {
                     //Add friend in Group
                     for(String name : dictGroup.get(select_GroupName))
                     {
-                        if(name.equals(select_Friendname)){
+                        if(name.equals(select_FriendName)){
                             duplicateFriend = true;
                             System.out.println("duplicateFriend!!");
                             break;
@@ -184,13 +187,13 @@ public class GroupPageController implements Initializable {
 
                     }
                     if(!duplicateFriend)
-                        dictGroup.get(select_GroupName).add(select_Friendname);
+                        dictGroup.get(select_GroupName).add(select_FriendName);
                 } 
                 else
                 {
                     //if dictGroup is Null then Create dictGroup[select_GroupName] & Add friend in Group
                     dictGroup.put(select_GroupName, new ArrayList<String>())  ;
-                    dictGroup.get(select_GroupName).add(select_Friendname);
+                    dictGroup.get(select_GroupName).add(select_FriendName);
                 }
                 // Change friends in Group follow Group name
                 changeFriendInGroup();*/
@@ -202,29 +205,6 @@ public class GroupPageController implements Initializable {
         }
  
     }
-    
-    @FXML
-    private void onClickedFriendinGroupList(MouseEvent event) { 
-        int index=0;
-        // Dubble Click
-        if(event.getClickCount() > 1&& !select_GroupName.equals("")){
-            select_listInGroup = tmpFriendInGroup_list.getSelectionModel().getSelectedItem();
-            if (dictGroup.containsKey(select_GroupName) ){
-               for(String name : dictGroup.get(select_GroupName))
-               {
-                   if(name.equals(select_listInGroup))
-                   {
-                       break;
-                   }
-                   index++;
-               }
-               dictGroup.get(select_GroupName).remove(index); 
-               //select_GroupName = tmpGroup_list.getSelectionModel().getSelectedItem();
-            }
-            changeFriendInGroup();
-            System.out.print("5555");
-        }
-    }    
     
     @FXML
     private void list_Action(ActionEvent event) {
@@ -244,6 +224,7 @@ public class GroupPageController implements Initializable {
     private void deleteGroup(ActionEvent event) {
         SmartReminder.myGroupServices.delete(select_GroupName, createrUsername);
         updateGroupList();
+        updateFriendInList();
         deleteGroup_pane.setVisible(false);
     }
 
@@ -254,6 +235,9 @@ public class GroupPageController implements Initializable {
 
     @FXML
     private void deleteFriend(ActionEvent event) {
+        SmartReminder.myGroupServices.deleteMember(select_FriendInGroupName, select_GroupName, createrUsername);
+        updateFriendInList();
+        deleteFriend_pane.setVisible(false);
     }
 
     @FXML
@@ -278,6 +262,34 @@ public class GroupPageController implements Initializable {
             if (!list.get(i).getUserAccount().getUserName().equals(SmartReminder.myAccount.getUserName())) {
                 friendInList_name.add(list.get(i).getUserAccount().getUserName());
             }
+        }
+    }
+
+    @FXML
+    private void onClickedFriendInGroupList(MouseEvent event) {
+        int index=0;
+        // Double Click
+        if (!tmpFriendInGroup_list.getSelectionModel().isEmpty()) {
+            select_FriendInGroupName = tmpFriendInGroup_list.getSelectionModel().getSelectedItem();
+        }
+        if(event.getClickCount() > 1 && !tmpFriendInGroup_list.getSelectionModel().isEmpty()){
+            FndInGpNameDelete_label.setText(select_FriendInGroupName);
+            deleteFriend_pane.setVisible(true);
+            
+            /*if (dictGroup.containsKey(select_GroupName) ){
+               for(String name : dictGroup.get(select_GroupName))
+               {
+                   if(name.equals(select_FriendInGroupName))
+                   {
+                       break;
+                   }
+                   index++;
+               }
+               dictGroup.get(select_GroupName).remove(index); 
+               //select_GroupName = tmpGroup_list.getSelectionModel().getSelectedItem();
+            }
+            changeFriendInGroup();
+            System.out.print("5555");*/
         }
     }
   

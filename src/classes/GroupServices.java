@@ -86,6 +86,18 @@ public class GroupServices {
         
         
         if (createrUserName.equals(SmartReminder.myAccount.getUserName())) {
+            
+            GroupDetail group = new GroupDetail();
+            for (int i = 0; i < groupList.size(); i++) {
+                if ( (groupList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
+                    (groupList.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(createrUserName)) 
+                ) {
+                    group = groupList.get(i).getGroupDetail();
+                }
+            }
+            System.out.println("Group name: " + group.getGroupName());
+            System.out.println("Creater name: " + group.getCreaterAccount().getUserName() + " ID: " + group.getCreaterAccount().getId());
+            
             ArrayList<GroupMember> members = getMembers(groupName, createrUserName);
             for (int i = 0; i < members.size(); i++) {
                 EntityManager em = SmartReminder.emf.createEntityManager();
@@ -96,14 +108,6 @@ public class GroupServices {
                 // Close the database connection:
                 em.close();
                 groupList.remove(members.get(i));
-            }
-            GroupDetail group = new GroupDetail();
-            for (int i = 0; i < groupList.size(); i++) {
-                if ( (groupList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
-                    (groupList.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(createrUserName)) 
-                ) {
-                    group = groupList.get(i).getGroupDetail();
-                }
             }
             
             EntityManager em = SmartReminder.emf.createEntityManager();
@@ -168,6 +172,30 @@ public class GroupServices {
         }
         else {
             System.out.println("This member is already exist.");
+        }
+    }
+    
+    public void deleteMember (String userName, String groupName, String createrUserName) {
+        
+        if (createrUserName.equals(SmartReminder.myAccount.getUserName())) {
+
+            ArrayList<GroupMember> members = getMembers(groupName, createrUserName);
+            for (int i = 0; i < members.size(); i++) {
+                if (userName.equals(members.get(i).getUserAccount().getUserName())) {
+                    EntityManager em = SmartReminder.emf.createEntityManager();
+                    GroupMember gMem = em.find(GroupMember.class, members.get(i).getId());
+                    em.getTransaction().begin();
+                    em.remove(gMem);
+                    em.getTransaction().commit();
+                    // Close the database connection:
+                    em.close();
+                    groupList.remove(members.get(i));
+                    System.out.println(members.get(i).getUserAccount().getUserName() + " is deleted.");
+                }
+            }
+        }
+        else {
+            System.out.println("You're not allowed to delete this member.");
         }
     }
 
