@@ -1,0 +1,26 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-17 18:18:21 #1 server] 
+Server on port 80 has started by 1656@DESKTOP-ELH9RTE
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-17 18:18:33 #1 server] 
+java.net.BindException: Address already in use: JVM_Bind
+	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.net.ServerSocket.bind(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+[2017-11-17 18:19:05 #2 server] 
+Server on port 80 has stopped by 1656@DESKTOP-ELH9RTE
+

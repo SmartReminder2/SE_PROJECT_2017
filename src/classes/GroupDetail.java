@@ -12,23 +12,22 @@ import javax.persistence.*;
  *
  * @author kan
  */
+
 @Entity
 public class GroupDetail implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
     
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     
     private String GroupName;
-    private long createrId;
+    private UserAccount createrAccount;
 
     public GroupDetail() {
     }
 
-    public GroupDetail(String GroupName, long createrId) {
+    public GroupDetail(String GroupName, UserAccount createrAccount) {
         this.GroupName = GroupName;
-        this.createrId = createrId;
+        this.createrAccount = createrAccount;
     }
 
     public void setGroupName(String GroupName) {
@@ -38,12 +37,12 @@ public class GroupDetail implements Serializable {
     public long getId() {
         return id;
     }
-
+    
     public String getGroupName() {
         return GroupName;
     }
 
-    public long getCreaterId() {
-        return createrId;
+    public UserAccount getCreaterAccount() {
+        return createrAccount;
     }
 }

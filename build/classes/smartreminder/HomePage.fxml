@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
@@ -12,53 +13,189 @@
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartreminder.HomePageController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#aaacae" height="800.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
-      <Pane layoutX="350.0" layoutY="-2.0" prefHeight="78.0" prefWidth="851.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#888f94" height="800.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1218.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#454546" height="800.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="358.0" />
+      <Pane fx:id="main_pane" layoutX="4.0" layoutY="-4.0" prefHeight="800.0" prefWidth="1218.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="0.0" />
+      <Pane fx:id="selectCal_Pane" layoutY="-1.0" prefHeight="149.0" prefWidth="350.0">
          <children>
-            <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="647.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="Feature">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#personalMenu" text="Personal" />
-                        <MenuItem mnemonicParsing="false" onAction="#groupMenu" text="Group" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
+            <ComboBox fx:id="year_list" layoutX="37.0" layoutY="58.0" onAction="#list_Action" prefHeight="31.0" prefWidth="132.0" promptText="2017" style="-fx-background-color: #ffffff;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </MenuBar>
-            <MenuBar layoutX="631.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="219.0">
-              <menus>
-                <Menu fx:id="username_menu" mnemonicParsing="false" text="Username">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#profileMenu" text="Profile" />
-                    <MenuItem mnemonicParsing="false" onAction="#signOut" text="Log out" />
-                  </items>
-                </Menu>
-              </menus>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </MenuBar>
-            <Label fx:id="label_Today" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="41.0" prefHeight="47.0" prefWidth="794.0" text="Today is 16 / 08 / 2018" textAlignment="CENTER" textFill="#656161">
+            </ComboBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="11.0" prefHeight="47.0" prefWidth="132.0" text="Month" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Tw Cen MT" size="32.0" />
+                  <Font name="Tw Cen MT Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="11.0" prefHeight="47.0" prefWidth="132.0" text="Year" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Tw Cen MT Bold" size="22.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="month_list" layoutX="198.0" layoutY="58.0" onAction="#mlist_Action" prefHeight="31.0" prefWidth="132.0" promptText="2017" style="-fx-background-color: #ffffff;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="279.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="262.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="244.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="226.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="169.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="188.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="207.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="115.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="133.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="151.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="97.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="79.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="61.0" layoutY="113.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="friendListPane" layoutX="13.0" layoutY="137.0" prefHeight="634.0" prefWidth="311.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ade3f0" height="47.0" layoutX="35.0" layoutY="199.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="148.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ade3f0" height="112.0" layoutX="34.0" layoutY="439.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="154.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ade3f0" height="138.0" layoutX="36.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="148.0" />
+            <ListView fx:id="friend_list" layoutX="36.0" layoutY="38.0" onMouseClicked="#dubbleClickedFriendList" prefHeight="112.0" prefWidth="257.0" />
+            <ListView fx:id="searchedUser_list" layoutX="34.0" layoutY="262.0" prefHeight="94.0" prefWidth="257.0" />
+            <TextField fx:id="idFriend_field" layoutX="34.0" layoutY="226.0" prefHeight="31.0" prefWidth="192.0" promptText="Username" />
+            <Label alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="52.0" layoutY="195.0" prefHeight="40.0" prefWidth="132.0" text="Add Friend" textFill="#494949">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="229.0" layoutY="226.0" mnemonicParsing="false" onAction="#searchUser" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: #9dbee4;" text="Search">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <effect>
+                  <Blend opacity="0.52" />
+               </effect>
+            </Button>
+            <Button fx:id="addFndBtn" layoutX="111.0" layoutY="364.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="31.0" prefWidth="104.0" style="-fx-background-color: #9dbee4;" text="Add">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend opacity="0.52" />
+               </effect>
+            </Button>
+            <Label alignment="BOTTOM_LEFT" layoutX="39.0" layoutY="421.0" prefHeight="47.0" prefWidth="186.0" text="Friend Request" textFill="#494949">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="56.0" layoutY="6.0" prefHeight="40.0" prefWidth="123.0" text="Friends List" textAlignment="CENTER" textFill="#494949">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Pane fx:id="deleteFriend_pane" layoutX="60.0" layoutY="25.0" prefHeight="162.0" prefWidth="225.0" visible="false">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5575d" height="130.0" layoutX="-12.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="234.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="3.0" prefHeight="47.0" prefWidth="178.0" text="Want to Delete ?" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="15.0" layoutY="93.0" mnemonicParsing="false" onAction="#deleteFriend" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: #ffffff;" text="Yes">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="131.0" layoutY="93.0" mnemonicParsing="false" onAction="#cancleDelete" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: #ffffff;" text="No">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label fx:id="nameDelete_label" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="45.0" prefHeight="40.0" prefWidth="178.0" text="Baka" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ListView fx:id="friendRequest_list" layoutX="34.0" layoutY="464.0" prefHeight="94.0" prefWidth="257.0" />
+            <Button fx:id="acceptBtn" layoutX="52.0" layoutY="566.0" mnemonicParsing="false" onAction="#acceptFriendRequest" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: #7af152;" text="Accept" textFill="#0a0a0a">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend opacity="0.52" />
+               </effect>
+            </Button>
+            <Button fx:id="DeclineBtn" defaultButton="true" layoutX="195.0" layoutY="566.0" mnemonicParsing="false" onAction="#declineFriendRequest" prefHeight="31.0" prefWidth="75.0" style="-fx-background-color: #e46363;" text="Decline">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend opacity="0.52" />
+               </effect>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="48.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="66.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="84.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="138.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="120.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="102.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="194.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="175.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="156.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="213.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="231.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="249.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="266.0" layoutY="413.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="263.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="246.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="228.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="210.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="153.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="172.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="191.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="99.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="117.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="135.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#434141" height="15.0" layoutX="81.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757070" height="15.0" layoutX="63.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4a1a1" height="15.0" layoutX="45.0" layoutY="171.0" stroke="#a19d9d" strokeType="INSIDE" width="15.0" />
+         </children>
+      </Pane>
+      <Pane layoutX="451.0" layoutY="40.0" prefHeight="52.0" prefWidth="301.0">
+         <children>
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ebebeb" height="47.0" layoutX="66.0" layoutY="3.0" stroke="#a19d9d" strokeType="INSIDE" width="56.0" />
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ebebeb" height="47.0" layoutX="124.0" layoutY="3.0" stroke="#a19d9d" strokeType="INSIDE" width="56.0" />
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#ebebeb" height="47.0" layoutX="182.0" layoutY="3.0" stroke="#a19d9d" strokeType="INSIDE" width="56.0" />
+            <Label fx:id="labelDate" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="3.0" prefHeight="47.0" prefWidth="56.0" text="16" textAlignment="CENTER" textFill="#5d5d61">
+               <font>
+                  <Font name="Tw Cen MT" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="124.0" layoutY="3.0" prefHeight="47.0" prefWidth="56.0" text="Nov" textAlignment="CENTER" textFill="#5d5d61">
+               <font>
+                  <Font name="Tw Cen MT" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelYear" alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="3.0" prefHeight="47.0" prefWidth="56.0" text="2017" textAlignment="CENTER" textFill="#5d5d61">
+               <font>
+                  <Font name="Tw Cen MT" size="20.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <GridPane fx:id="calendarPane" layoutX="378.0" layoutY="109.0" prefHeight="623.0" prefWidth="794.0">
+      <Label fx:id="label_Today" alignment="CENTER" contentDisplay="CENTER" layoutX="389.0" layoutY="46.0" prefHeight="47.0" prefWidth="132.0" text="Today is 16 / 08 / 2018" textAlignment="CENTER" textFill="#343436">
+         <font>
+            <Font name="Tw Cen MT" size="32.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="calendarPane" layoutX="385.0" layoutY="109.0" prefHeight="623.0" prefWidth="797.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -127,37 +264,37 @@
             <Rectangle fx:id="dayBlock40" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="94.0" onMouseClicked="#onclickCalendar" stroke="#b2aeae" strokeType="INSIDE" width="115.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
             <Rectangle fx:id="dayBlock41" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="94.0" onMouseClicked="#onclickCalendar" stroke="#b2aeae" strokeType="INSIDE" width="115.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
             <Rectangle fx:id="dayBlock42" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="94.0" onMouseClicked="#onclickCalendar" stroke="#b2aeae" strokeType="INSIDE" width="115.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-            <Label prefHeight="52.0" prefWidth="104.0" text="    Sun" textFill="WHITE">
+            <Label prefHeight="52.0" prefWidth="104.0" text="    Sun" textFill="#6f6b6b">
                <font>
                   <Font name="Tw Cen MT" size="33.0" />
                </font>
             </Label>
-            <Label prefHeight="52.0" prefWidth="104.0" text="    Mon" textFill="WHITE" GridPane.columnIndex="1">
+            <Label prefHeight="52.0" prefWidth="104.0" text="    Mon" textFill="#6f6b6b" GridPane.columnIndex="1">
                <font>
                   <Font name="Tw Cen MT" size="33.0" />
                </font>
             </Label>
-            <Label prefHeight="52.0" prefWidth="104.0" text="   Tue" textFill="WHITE" GridPane.columnIndex="2">
+            <Label prefHeight="52.0" prefWidth="104.0" text="   Tue" textFill="#6f6b6b" GridPane.columnIndex="2">
                <font>
                   <Font name="Tw Cen MT" size="33.0" />
                </font>
             </Label>
-            <Label prefHeight="52.0" prefWidth="104.0" text="   Wed" textFill="WHITE" GridPane.columnIndex="3">
+            <Label prefHeight="52.0" prefWidth="104.0" text="   Wed" textFill="#6f6b6b" GridPane.columnIndex="3">
                <font>
                   <Font name="Tw Cen MT" size="33.0" />
                </font>
             </Label>
-            <Label prefHeight="52.0" prefWidth="104.0" text="    Thu" textFill="WHITE" GridPane.columnIndex="4">
+            <Label prefHeight="52.0" prefWidth="104.0" text="    Thu" textFill="#6f6b6b" GridPane.columnIndex="4">
                <font>
                   <Font name="Tw Cen MT" size="33.0" />
                </font>
             </Label>
-            <Label prefHeight="52.0" prefWidth="104.0" text="    Fri" textFill="WHITE" GridPane.columnIndex="5">
+            <Label prefHeight="52.0" prefWidth="104.0" text="    Fri" textFill="#6f6b6b" GridPane.columnIndex="5">
                <font>
                   <Font name="Tw Cen MT" size="33.0" />
                </font>
             </Label>
-            <Label prefHeight="52.0" prefWidth="104.0" text="    Sat" textFill="WHITE" GridPane.columnIndex="6">
+            <Label prefHeight="52.0" prefWidth="104.0" text="    Sat" textFill="#6f6b6b" GridPane.columnIndex="6">
                <font>
                   <Font name="Tw Cen MT" size="33.0" />
                </font>
@@ -379,86 +516,44 @@
             </Circle>
          </children>
       </GridPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b8ebe9" height="800.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="358.0" />
-      <Pane fx:id="main_pane" layoutX="4.0" layoutY="-4.0" prefHeight="800.0" prefWidth="350.0" />
-      <Pane fx:id="selectCal_Pane" prefHeight="258.0" prefWidth="350.0">
+      <Pane layoutX="357.0" layoutY="-2.0" prefHeight="40.0" prefWidth="844.0">
          <children>
-            <ComboBox fx:id="year_list" layoutX="85.0" layoutY="90.0" onAction="#list_Action" prefHeight="31.0" prefWidth="178.0" promptText="2017">
+            <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="647.0" style="-fx-background-color: #5d5d61;">
+              <menus>
+                <Menu mnemonicParsing="false" text="Feature">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#personalMenu" text="Personal" />
+                        <MenuItem mnemonicParsing="false" onAction="#groupMenu" text="Group" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ComboBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="121.0" prefHeight="47.0" prefWidth="178.0" text="Month" textAlignment="CENTER" textFill="#656161">
-               <font>
-                  <Font name="Tw Cen MT Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="43.0" prefHeight="47.0" prefWidth="178.0" text="Year" textAlignment="CENTER" textFill="#656161">
-               <font>
-                  <Font name="Tw Cen MT Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="193.0" prefHeight="47.0" prefWidth="314.0" text="_____________________" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="month_list" layoutX="87.0" layoutY="168.0" onAction="#mlist_Action" prefHeight="31.0" prefWidth="178.0" promptText="2017">
+            </MenuBar>
+            <MenuBar layoutX="642.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="219.0" style="-fx-background-color: #5d5d61;">
+              <menus>
+                <Menu fx:id="username_menu" mnemonicParsing="false" text="Username">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#profileMenu" text="Profile" />
+                    <MenuItem mnemonicParsing="false" onAction="#signOut" text="Log out" />
+                  </items>
+                </Menu>
+              </menus>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ComboBox>
-         </children>
-      </Pane>
-      <Pane fx:id="friendListPane" layoutY="250.0" prefHeight="552.0" prefWidth="360.0">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="-3.0" prefHeight="47.0" prefWidth="192.0" text="Friends List" textAlignment="CENTER" textFill="#656161">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-            </Label>
-            <ListView fx:id="friend_list" layoutX="85.0" layoutY="40.0" onMouseClicked="#dubbleClickedFriendList" prefHeight="152.0" prefWidth="192.0" />
-            <TextField fx:id="idFriend_field" layoutX="57.0" layoutY="239.0" prefHeight="31.0" prefWidth="192.0" promptText="Username" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="192.0" prefHeight="47.0" prefWidth="192.0" text="Add Friend" textAlignment="CENTER" textFill="#656161">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-            </Label>
-            <Button layoutX="252.0" layoutY="239.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="31.0" prefWidth="62.0" text="Add">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="269.0" prefHeight="47.0" prefWidth="314.0" text="_____________________" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
-            <Pane fx:id="deleteFriend_pane" layoutX="77.0" layoutY="47.0" prefHeight="138.0" prefWidth="208.0" visible="false">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5575d" height="130.0" layoutX="-10.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="227.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="3.0" prefHeight="47.0" prefWidth="178.0" text="Want to Delete ?" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="15.0" layoutY="93.0" mnemonicParsing="false" onAction="#deleteFriend" prefHeight="31.0" prefWidth="62.0" text="Yes">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button layoutX="131.0" layoutY="93.0" mnemonicParsing="false" onAction="#cancleDelete" prefHeight="31.0" prefWidth="62.0" text="No">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Label fx:id="nameDelete_label" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="45.0" prefHeight="40.0" prefWidth="178.0" text="Baka" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
+            </MenuBar>
          </children>
       </Pane>
    </children>
