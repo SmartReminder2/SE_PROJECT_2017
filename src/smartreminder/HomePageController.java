@@ -10,8 +10,12 @@ import classes.Friend;
 import classes.FriendServices;
 import classes.PersonalCalendar;
 import classes.UserAccount;
+<<<<<<< HEAD
 import com.jfoenix.controls.JFXButton;
+import java.net.URL;    
+=======
 import java.net.URL;
+>>>>>>> master
 
 import java.text.DateFormatSymbols;
 import java.time.Month;
@@ -279,6 +283,7 @@ public class HomePageController implements Initializable {
     @FXML
     private ListView<String> searchedUser_list;
     @FXML
+<<<<<<< HEAD
     private ListView<String> friendRequest_list;
     @FXML
     private JFXButton showCurrentYear;
@@ -290,6 +295,17 @@ public class HomePageController implements Initializable {
     private Pane selectCalPane;
     @FXML
     private ImageView picLogout;
+=======
+    private Button addFndBtn;
+    @FXML
+    private ListView<String> friendRequest_list;
+    @FXML
+    private Button acceptBtn;
+    @FXML
+    private Button DeclineBtn;
+    
+    public static boolean isPersonal = true;
+>>>>>>> master
  
     /**
      * Initializes the controller class.
@@ -326,12 +342,19 @@ public class HomePageController implements Initializable {
         month = Month.valueOf(monthName.toUpperCase()).getValue();
         generateCalendar(--month,year);
     }
+<<<<<<< HEAD
     String defaultMonth;
+=======
+     
+>>>>>>> master
     void setInit()
     {  
        
        //Set Friend List
+<<<<<<< HEAD
          
+=======
+>>>>>>> master
         friend_list.setItems(friendList_name);
         searchedUser_list.setItems(userNameList);
         friendRequest_list.setItems(friendReqNameList);
@@ -347,7 +370,12 @@ public class HomePageController implements Initializable {
         generateCalendar(month,year);
         month_list.setValue(defaultMonth);
         year_list.setValue(year);
+<<<<<<< HEAD
   
+=======
+        String date = "Today is "+current_day+" / "+defaultMonth+" / "+year ;
+        label_Today.setText(date);
+>>>>>>> master
     }
     void generateCalendar(int month,int year){
        
@@ -449,6 +477,7 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void addFriend(ActionEvent event) {
+<<<<<<< HEAD
          //  System.out.println("55555555555555555555555");
         if(!idFriend_field.getText().equals("")){
             ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(searchedUser_list.getSelectionModel().getSelectedItem());
@@ -459,6 +488,12 @@ public class HomePageController implements Initializable {
             updateFriendList();
             System.out.println(userList.get(0));
         }
+=======
+        ArrayList<UserAccount> userList = SmartReminder.myFriendServices.searchUser(searchedUser_list.getSelectionModel().getSelectedItem());
+        Friend fnd = new Friend(SmartReminder.myAccount, userList.get(0));
+        SmartReminder.myFriendServices.add(fnd);
+        updateFriendList();
+>>>>>>> master
     }
 
     @FXML
@@ -508,6 +543,7 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void personalMenu(ActionEvent event) {
+        isPersonal = true;
         SmartReminder.secondaryPane.getChildren().clear();
         friendListPane.setVisible(true);
         setInit();
@@ -515,6 +551,10 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void groupMenu(ActionEvent event) {
+<<<<<<< HEAD
+=======
+        isPersonal = false;
+>>>>>>> master
         GroupPageController.updateGroupList();
         GroupPageController.friendInList_name.clear();
         updateFriendList();

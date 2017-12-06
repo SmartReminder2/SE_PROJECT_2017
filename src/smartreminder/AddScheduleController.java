@@ -65,7 +65,14 @@ public class AddScheduleController implements Initializable {
         colorList.add(Color.ORANGE);
         colorList.add(Color.PALEGREEN);
         System.out.println("setTimeTable");
-        List<Schedule> list = SmartReminder.myCalendar.getSchedule(SmartReminder.beginTime, SmartReminder.myAccount);
+        List<Schedule> list = new ArrayList<>();
+        
+        if (HomePageController.isPersonal) {
+            list = SmartReminder.myCalendar.getSchedule(SmartReminder.beginTime, SmartReminder.myAccount);
+        }
+        else {
+            list = SmartReminder.groupCalendar.getAllSchedules(GroupPageController.select_GroupName, GroupPageController.createrUsername);
+        }
         
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).getTitle());
@@ -97,12 +104,17 @@ public class AddScheduleController implements Initializable {
                 if(num[i] == 1) {
                     System.out.println(i);
                     Rectangle rect = new Rectangle(xPos, yPos, 600, height);
-                    rect.setFill(colorList.get(j % 3));
+                    if (HomePageController.isPersonal) {
+                        rect.setFill(colorList.get(j % 3));
+                    }
+                    else {
+                        rect.setFill(Color.GRAY);
+                    }
                     rect.setVisible(true);
                     timeTable_paneTemp.getChildren().add(rect);
                 }
 
-                if(i == Math.ceil((lastPos - firstPos)/2.0) + firstPos) {
+                if((i == Math.ceil((lastPos - firstPos)/2.0) + firstPos) && HomePageController.isPersonal) {
                     /*String text = list.get(0).getTitle().substring(0, 8);
                     text = text.concat(" ..");
                     System.out.println(text);*/
