@@ -1,5 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 [2017-11-21 22:14:38 #1 explorer] 
 [ObjectDB 2.7.2_06] javax.persistence.PersistenceException
 Attempt to open a database file 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' that is currently in use by another process (error 141)
@@ -91,4 +92,44 @@ Configuration path: C:\Users\58010622\Desktop\SE-Project\SmartReminder\objectdb-
 
 [2017-11-21 22:26:27 #3 store] 
 Database 'C:\Users\58010622\Desktop\SE-Project\SmartReminder\db\database.odb' is closed by 8096@DESKTOP-ELH9RTE
+=======
+[2017-11-21 17:02:58 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 7464@kan-PC
+
+[2017-11-21 17:02:58 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-21 17:04:07 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 7464@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-21 17:08:44 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 9040@kan-PC
+
+[2017-11-21 17:08:44 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-21 17:09:50 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 9040@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-21 17:10:33 #1 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is opened by 6704@kan-PC
+
+[2017-11-21 17:10:33 #2 store] 
+Configuration path: C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\objectdb-2.7.2_06\objectdb.conf
+
+[2017-11-21 17:10:50 #3 store] 
+Database 'C:\Users\kan\Documents\SmartReminderV2\SE_PROJECT_2017\db\database.odb' is closed by 6704@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-11-21 19:35:52 #1 server] 
+Server on port 6136 has started by 5780@kan-PC
+
+[2017-11-22 08:39:01 #2 server] 
+Server on port 6136 has stopped by 5780@kan-PC
+>>>>>>> master
 
