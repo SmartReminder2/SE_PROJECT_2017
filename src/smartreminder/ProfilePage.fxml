@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartreminder.ProfilePageController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#454546" height="750.0" layoutX="1.0" layoutY="7.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="345.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#44444500" height="750.0" layoutX="1.0" layoutY="7.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="345.0" />
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="368.0" layoutX="42.0" layoutY="293.0" opacity="0.96" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="262.0" />
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#93c3eb" height="51.0" layoutX="26.0" layoutY="269.0" opacity="0.96" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="298.0" />
       <Label alignment="CENTER" layoutX="25.0" layoutY="276.0" prefHeight="38.0" prefWidth="101.0" text="Contact">
