@@ -5,6 +5,7 @@
  */
 package smartreminder;
 
+import classes.*;
 import java.net.URL;
 import static java.sql.JDBCType.NULL;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -43,142 +45,166 @@ public class GroupPageController implements Initializable {
     @FXML
     private ComboBox<?> month_list;
     
-    static public ListView<String> friend_listTemp;
-    static public ListView<String> friendinGroup_listTemp;
-    static public ListView<String> group_listTemp;
-    static ObservableList<String> groupList_name = FXCollections.observableArrayList ("Handsome","Lolicon"); 
-    static ObservableList<String> friendlist_name; 
+    static public ListView<String> tmpFriend_list;
+    static public ListView<String> tmpFriendInGroup_list;
+    static public ListView<String> tmpGroup_list;
+    
+    static ObservableList<String> groupList_name = FXCollections.observableArrayList (); 
+    static ObservableList<String> tmpFriendList_name;
+    static ObservableList<String> friendInList_name = FXCollections.observableArrayList ();
+    
     Map<String, List<String>> dictGroup  = new HashMap<String, List<String>>();;
     @FXML
     private Pane deleteGroup_pane;
     @FXML
-    private Label nameDelete_label;
-    @FXML
     private Pane deleteFriend_pane;
-    @FXML
-    private Label nameDelete_label1;
     
-    private ListView<String> friendinGroup_list;
+    //private ListView<String> friendinGroup_list;
      @FXML
     private ListView<String> friend_list;
     @FXML
     private ListView<String> group_list;
     @FXML
-    private ListView<?> friendInGroup_list;
+    private ListView<String> friendInGroup_list;
 
+    static String select_GroupName;
+    static String select_FriendName;
+    static String select_FriendInGroupName;
+    ObservableList<String> friend_observableList;
+    ArrayList friends;
+    @FXML
+    private Label groupNameDelete_label;
+    @FXML
+    private Label FndInGpNameDelete_label;
+    
+    static GroupDetail tmpGroupDetail;
+    
+    static String createrUsername = new String();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
-        friendinGroup_listTemp = friendinGroup_list;
-        friend_listTemp = friend_list;
-        group_listTemp = group_list;
+        tmpFriendInGroup_list = friendInGroup_list;
+        tmpFriend_list = friend_list;
+        tmpGroup_list = group_list;
         setInit();
     }   
     static void setInit()
     {
-        friendlist_name = HomePageController.friendList_name;
-        friend_listTemp.setItems(friendlist_name);
-        group_listTemp.setItems(groupList_name); 
+        tmpFriendList_name = HomePageController.friendList_name;
+        tmpFriend_list.setItems(tmpFriendList_name);
+        tmpFriendInGroup_list.setItems(friendInList_name);
+        tmpGroup_list.setItems(groupList_name); 
     }
 
-    String select_GroupName;
-    String select_Friendname;
-    String select_listInGroup;
-    ObservableList<String> friend_observableList;
-    ArrayList friends;
     void changeFriendInGroup()
     {
         friends = (ArrayList) dictGroup.get(select_GroupName);
         friend_observableList = FXCollections.observableList(friends);
-        friendinGroup_list.setItems(friend_observableList);
+        friendInGroup_list.setItems(friend_observableList);
     }
     @FXML
     private void onClickedGroupList(MouseEvent event) {
-        select_GroupName = group_listTemp.getSelectionModel().getSelectedItem();
-        if(event.getClickCount() > 1){
-            // if Dubble click Delete Group
-            if (dictGroup.containsKey(select_GroupName) ){
-               dictGroup.get(select_GroupName).clear();
-               int index = groupList_name.indexOf(select_GroupName);
-               groupList_name.remove(index);
-               select_GroupName = group_listTemp.getSelectionModel().getSelectedItem();
-              
+        if (!tmpGroup_list.getSelectionModel().isEmpty()) {
+            String[] str = tmpGroup_list.getSelectionModel().getSelectedItem().split(" by:");
+            System.out.println(str[0]);
+            System.out.println(str[str.length-1]);
+            select_GroupName = str[0];
+            createrUsername = str[str.length-1];
+            
+            ArrayList<Friend> fndList = SmartReminder.myFriendServices.getFriendList();
+            UserAccount account = null;
+            for (int i = 0; i < fndList.size(); i++) {
+                if (fndList.get(i).getFriendAccount().getUserName().equals(createrUsername)) {
+                    account = fndList.get(i).getFriendAccount();
+                }
             }
-         }
+            tmpGroupDetail = new GroupDetail(select_GroupName, account);
+            if (tmpGroupDetail != null) {
+                updateFriendInList();
+            }
+        }
+        
+        if(event.getClickCount() > 1){
+             // if Double click Delete Group
+            if (!tmpGroup_list.getSelectionModel().isEmpty()) {
+                
+                
+                groupNameDelete_label.setText(select_GroupName);
+                deleteGroup_pane.setVisible(true);
+                    /*if (dictGroup.containsKey(select_GroupName) ){
+                       dictGroup.get(select_GroupName).clear();
+                       int index = groupList_name.indexOf(select_GroupName);
+                       groupList_name.remove(index);
+                       select_GroupName = tmpGroup_list.getSelectionModel().getSelectedItem();
+
+                    }*/
+            }
+            else {
+                
+            }
+        }
         else // on Click
         {
-            //if dictGroup is Null then Create dictGroup[select_GroupName]
-            if (!dictGroup.containsKey(select_GroupName) ){
-                dictGroup.put(select_GroupName, new ArrayList<String>());
-            } 
+                //if dictGroup is Null then Create dictGroup[select_GroupName]
+                /*if (!dictGroup.containsKey(select_GroupName) ){
+                    dictGroup.put(select_GroupName, new ArrayList<String>());
+                } */
         }
-        // Change friends in Group follow Group name
-        changeFriendInGroup();
+            
+            // Change friends in Group follow Group name
+            //changeFriendInGroup();
+        
     }
     Boolean duplicateFriend;
     @FXML
     private void onClickedFriendList(MouseEvent event) {
         duplicateFriend = false;
-        
+        select_FriendName = tmpFriend_list.getSelectionModel().getSelectedItem();
         if(event.getClickCount() > 1){
-           
-            select_Friendname = friend_list.getSelectionModel().getSelectedItem();
-            if (dictGroup.containsKey(select_GroupName) ){
-                //Add friend in Group
-                for(String name : dictGroup.get(select_GroupName))
-                {
-                    if(name.equals(select_Friendname)){
-                        duplicateFriend = true;
-                        System.out.println("duplicateFriend!!");
-                        break;
-                    }
-                            
+            if (!tmpFriend_list.getSelectionModel().isEmpty() && tmpGroup_list.getSelectionModel().getSelectedItem() != null) {
+                /*String[] str = tmpGroup_list.getSelectionModel().getSelectedItem().split(" by:");
+                System.out.println(str[0]);
+                System.out.println(str[str.length-1]);
+                select_GroupName = str[0];
+                createrUsername = str[str.length-1];*/
+                        
+                SmartReminder.myGroupServices.addMember(select_FriendName, select_GroupName, createrUsername);
+                if (tmpGroupDetail != null) {
+                    updateFriendInList();
                 }
-                if(!duplicateFriend)
-                    dictGroup.get(select_GroupName).add(select_Friendname);
-            } 
-            else
-            {
-                //if dictGroup is Null then Create dictGroup[select_GroupName] & Add friend in Group
-                dictGroup.put(select_GroupName, new ArrayList<String>())  ;
-                dictGroup.get(select_GroupName).add(select_Friendname);
+                /*if (dictGroup.containsKey(select_GroupName) ){
+                    //Add friend in Group
+                    for(String name : dictGroup.get(select_GroupName))
+                    {
+                        if(name.equals(select_FriendName)){
+                            duplicateFriend = true;
+                            System.out.println("duplicateFriend!!");
+                            break;
+                        }
+
+                    }
+                    if(!duplicateFriend)
+                        dictGroup.get(select_GroupName).add(select_FriendName);
+                } 
+                else
+                {
+                    //if dictGroup is Null then Create dictGroup[select_GroupName] & Add friend in Group
+                    dictGroup.put(select_GroupName, new ArrayList<String>())  ;
+                    dictGroup.get(select_GroupName).add(select_FriendName);
+                }
+                // Change friends in Group follow Group name
+                changeFriendInGroup();*/
             }
-            // Change friends in Group follow Group name
-            changeFriendInGroup();
-           
-        }
+            else {
+                System.out.println("Not selected group or group yet.");
+            }
             
-    }
-    
-    @FXML
-    private void onClickedFriendinGroupList(MouseEvent event) { 
-        int index=0;
-        // Dubble Click
-        if(event.getClickCount() > 1&& !select_GroupName.equals("")){
-            select_listInGroup = friendinGroup_listTemp.getSelectionModel().getSelectedItem();
-            if (dictGroup.containsKey(select_GroupName) ){
-               for(String name : dictGroup.get(select_GroupName))
-               {
-                   if(name.equals(select_listInGroup))
-                   {
-                       break;
-                   }
-                   index++;
-               }
-               dictGroup.get(select_GroupName).remove(index); 
-               //select_GroupName = group_listTemp.getSelectionModel().getSelectedItem();
-            }
-            changeFriendInGroup();
-            System.out.print("5555");
         }
+ 
     }
-    @FXML
-    private void addGroup(ActionEvent event) {
-        groupList_name.add(groupName.getText());
-    }
-    
     
     @FXML
     private void list_Action(ActionEvent event) {
@@ -187,9 +213,19 @@ public class GroupPageController implements Initializable {
     @FXML
     private void mlist_Action(ActionEvent event) {
     }
+    
+    @FXML
+    private void createGroup(ActionEvent event) {
+        SmartReminder.myGroupServices.create(groupName.getText());
+        updateGroupList();
+    }
 
     @FXML
     private void deleteGroup(ActionEvent event) {
+        SmartReminder.myGroupServices.delete(select_GroupName, createrUsername);
+        updateGroupList();
+        updateFriendInList();
+        deleteGroup_pane.setVisible(false);
     }
 
     @FXML
@@ -199,6 +235,9 @@ public class GroupPageController implements Initializable {
 
     @FXML
     private void deleteFriend(ActionEvent event) {
+        SmartReminder.myGroupServices.deleteMember(select_FriendInGroupName, select_GroupName, createrUsername);
+        updateFriendInList();
+        deleteFriend_pane.setVisible(false);
     }
 
     @FXML
@@ -207,8 +246,51 @@ public class GroupPageController implements Initializable {
         
     }
 
+    public static void updateGroupList() {
+        groupList_name.clear();
+        ArrayList<GroupMember> list = SmartReminder.myGroupServices.getMyGroupList();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("Point " + list.get(i).getUserAccount().getUserName());
+            groupList_name.add(list.get(i).getGroupDetail().getGroupName() + " by:" + list.get(i).getGroupDetail().getCreaterAccount().getUserName());
+        }
+    }
     
+    public static void updateFriendInList() {
+        friendInList_name.clear();
+        ArrayList<GroupMember> list = SmartReminder.myGroupServices.getMembers(select_GroupName, createrUsername);
+        for (int i = 0; i < list.size(); i++) {
+            if (!list.get(i).getUserAccount().getUserName().equals(SmartReminder.myAccount.getUserName())) {
+                friendInList_name.add(list.get(i).getUserAccount().getUserName());
+            }
+        }
+    }
 
-    
-    
+    @FXML
+    private void onClickedFriendInGroupList(MouseEvent event) {
+        int index=0;
+        // Double Click
+        if (!tmpFriendInGroup_list.getSelectionModel().isEmpty()) {
+            select_FriendInGroupName = tmpFriendInGroup_list.getSelectionModel().getSelectedItem();
+        }
+        if(event.getClickCount() > 1 && !tmpFriendInGroup_list.getSelectionModel().isEmpty()){
+            FndInGpNameDelete_label.setText(select_FriendInGroupName);
+            deleteFriend_pane.setVisible(true);
+            
+            /*if (dictGroup.containsKey(select_GroupName) ){
+               for(String name : dictGroup.get(select_GroupName))
+               {
+                   if(name.equals(select_FriendInGroupName))
+                   {
+                       break;
+                   }
+                   index++;
+               }
+               dictGroup.get(select_GroupName).remove(index); 
+               //select_GroupName = tmpGroup_list.getSelectionModel().getSelectedItem();
+            }
+            changeFriendInGroup();
+            System.out.print("5555");*/
+        }
+    }
+  
 }

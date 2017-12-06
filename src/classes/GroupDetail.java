@@ -5,11 +5,19 @@
  */
 package classes;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author kan
  */
-public class GroupDetail{
+
+@Entity
+public class GroupDetail implements Serializable {
+    
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id;
     
     private String GroupName;
     private UserAccount createrAccount;
@@ -17,15 +25,19 @@ public class GroupDetail{
     public GroupDetail() {
     }
 
-    public GroupDetail(String GroupName, UserAccount createrId) {
+    public GroupDetail(String GroupName, UserAccount createrAccount) {
         this.GroupName = GroupName;
-        this.createrAccount = createrId;
+        this.createrAccount = createrAccount;
     }
 
     public void setGroupName(String GroupName) {
         this.GroupName = GroupName;
     }
 
+    public long getId() {
+        return id;
+    }
+    
     public String getGroupName() {
         return GroupName;
     }

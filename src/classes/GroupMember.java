@@ -15,7 +15,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class GroupCatalogue implements Serializable {
+public class GroupMember implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
@@ -25,36 +25,12 @@ public class GroupCatalogue implements Serializable {
     private UserAccount userAccount;
     private GroupDetail groupDetail;
     
-    private GroupCatalogue(){}
+    private GroupMember(){}
 
-    public GroupCatalogue(UserAccount userAccount, GroupDetail groupDetail) {
+    public GroupMember(UserAccount userAccount, GroupDetail groupDetail) {
         this.userAccount = userAccount;
         this.groupDetail = groupDetail;
     }
-    
-    
-    /*public void add(UserAccount user, GroupDetail group) {
-        userList.add(user);
-        groupList.add(group);
-    }
-    
-    public void delete(UserAccount user, GroupDetail group) {
-        userList.remove(user);
-        groupList.remove(group);
-    }
-    
-    public ArrayList getAllUser(GroupDetail group) {
-        
-        ArrayList<UserAccount> list = new ArrayList<>();
-        
-        for(int i = 0; i < groupList.size(); i++) {
-            if(groupList.get(i).getId() == group.getId()) {
-                list.add(userList.get(i));
-            }
-        }
-            
-        return list;
-    }*/
 
     public long getId() {
         return id;
