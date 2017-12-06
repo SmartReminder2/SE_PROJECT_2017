@@ -284,6 +284,8 @@ public class HomePageController implements Initializable {
     private Button acceptBtn;
     @FXML
     private Button DeclineBtn;
+    
+    public static boolean isPersonal = true;
  
     /**
      * Initializes the controller class.
@@ -491,6 +493,7 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void personalMenu(ActionEvent event) {
+        isPersonal = true;
         SmartReminder.secondaryPane.getChildren().clear();
         selectCal_Pane.setVisible(true);
         friendListPane.setVisible(true);
@@ -499,6 +502,7 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void groupMenu(ActionEvent event) {
+        isPersonal = false;
         GroupPageController.updateGroupList();
         GroupPageController.friendInList_name.clear();
         updateFriendList();

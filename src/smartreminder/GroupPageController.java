@@ -113,7 +113,7 @@ public class GroupPageController implements Initializable {
             System.out.println(str[str.length-1]);
             select_GroupName = str[0];
             createrUsername = str[str.length-1];
-
+            
             ArrayList<Friend> fndList = SmartReminder.myFriendServices.getFriendList();
             UserAccount account = null;
             for (int i = 0; i < fndList.size(); i++) {

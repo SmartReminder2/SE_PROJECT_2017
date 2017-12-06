@@ -5,7 +5,9 @@
         <group>
             <file>file:/C:/Users/kan/Documents/SmartReminderV2/SE_PROJECT_2017/src/smartreminder/SmartReminder.java</file>
             <file>file:/C:/Users/kan/Documents/SmartReminderV2/SE_PROJECT_2017/src/smartreminder/GroupPageController.java</file>
-            <file>file:/C:/Users/kan/Documents/SmartReminderV2/SE_PROJECT_2017/src/smartreminder/HomePageController.java</file>
+            <file>file:/C:/Users/kan/Documents/SmartReminderV2/SE_PROJECT_2017/src/smartreminder/AddScheduleController.java</file>
+            <file>file:/C:/Users/kan/Documents/SmartReminderV2/SE_PROJECT_2017/src/classes/PersonalCalendar.java</file>
+            <file>file:/C:/Users/kan/Documents/SmartReminderV2/SE_PROJECT_2017/src/classes/GroupCalendar.java</file>
         </group>
     </open-files>
 </project-private>
