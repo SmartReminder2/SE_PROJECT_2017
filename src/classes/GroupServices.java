@@ -21,8 +21,11 @@ public class GroupServices {
     private List<GroupMember> groupList = new ArrayList<>();
     
     private GroupServices(){
-    
-        EntityManager em = SmartReminder.emf.createEntityManager();
+        
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
  
         // Store 1000 Point objects in the database:
         em.getTransaction().begin();
@@ -30,8 +33,7 @@ public class GroupServices {
         TypedQuery<GroupMember> query = em.createQuery("SELECT gMem FROM GroupMember gMem", GroupMember.class);
         groupList = query.getResultList();
         
-        em.close();
-        
+        odb.closeConnection();
     }
     
     public static GroupServices getInstance(){
@@ -53,20 +55,25 @@ public class GroupServices {
             }
             if (isValid) {
                 GroupDetail newGroup = new GroupDetail(groupName, SmartReminder.myAccount);
-                EntityManager em = SmartReminder.emf.createEntityManager();
+                
+                ObjectDBServices odb = new ObjectDBServices();
+                EntityManager em = odb.openConnection();
+                //EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("./db/database.odb");
+                //EntityManager em1 = emf1.createEntityManager();
                 em.getTransaction().begin();
                 em.persist(newGroup);
                 em.getTransaction().commit();
                 // Close the database connection:
-                em.close();
+                odb.closeConnection();
 
                 GroupMember newMember = new GroupMember(SmartReminder.myAccount, newGroup);
-                em = SmartReminder.emf.createEntityManager();
+                odb = new ObjectDBServices();
+                em = odb.openConnection();
                 em.getTransaction().begin();
                 em.persist(newMember);
                 em.getTransaction().commit();
                 // Close the database connection:
-                em.close();
+                odb.closeConnection();
                 groupList.add(newMember);
                 System.out.println("Creating group success!!");
             }
@@ -100,23 +107,29 @@ public class GroupServices {
             
             ArrayList<GroupMember> members = getMembers(groupName, createrUserName);
             for (int i = 0; i < members.size(); i++) {
-                EntityManager em = SmartReminder.emf.createEntityManager();
+                ObjectDBServices odb = new ObjectDBServices();
+                EntityManager em = odb.openConnection();
+                //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+                //EntityManager em = emf.createEntityManager();
                 GroupMember gMem = em.find(GroupMember.class, members.get(i).getId());
                 em.getTransaction().begin();
                 em.remove(gMem);
                 em.getTransaction().commit();
                 // Close the database connection:
-                em.close();
+                odb.closeConnection();
                 groupList.remove(members.get(i));
             }
             
-            EntityManager em = SmartReminder.emf.createEntityManager();
+            ObjectDBServices odb = new ObjectDBServices();
+            EntityManager em = odb.openConnection();
+            //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+            //EntityManager em = emf.createEntityManager();
             GroupDetail g = em.find(GroupDetail.class, group.getId());
             em.getTransaction().begin();
             em.remove(g);
             em.getTransaction().commit();
             // Close the database connection:
-            em.close();
+            odb.closeConnection();
             
             System.out.println(group.getGroupName() + " is deleted.");
         }
@@ -161,12 +174,15 @@ public class GroupServices {
             
             GroupMember newMember = new GroupMember(account, group);
             
-            EntityManager em = SmartReminder.emf.createEntityManager();
+            ObjectDBServices odb = new ObjectDBServices();
+            EntityManager em = odb.openConnection();
+            //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+            //EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
             em.persist(newMember);
             em.getTransaction().commit();
             // Close the database connection:
-            em.close();
+            odb.closeConnection();
             groupList.add(newMember);
             System.out.println("Adding new member success!!");
         }
@@ -182,13 +198,16 @@ public class GroupServices {
             ArrayList<GroupMember> members = getMembers(groupName, createrUserName);
             for (int i = 0; i < members.size(); i++) {
                 if (userName.equals(members.get(i).getUserAccount().getUserName())) {
-                    EntityManager em = SmartReminder.emf.createEntityManager();
+                    ObjectDBServices odb = new ObjectDBServices();
+                    EntityManager em = odb.openConnection();
+                    //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+                    //EntityManager em = emf.createEntityManager();
                     GroupMember gMem = em.find(GroupMember.class, members.get(i).getId());
                     em.getTransaction().begin();
                     em.remove(gMem);
                     em.getTransaction().commit();
                     // Close the database connection:
-                    em.close();
+                    odb.closeConnection();
                     groupList.remove(members.get(i));
                     System.out.println(members.get(i).getUserAccount().getUserName() + " is deleted.");
                 }
@@ -211,16 +230,33 @@ public class GroupServices {
     
     public ArrayList getMembers(String groupName, String createrUserName) {
         ArrayList<GroupMember> members = new ArrayList<>();
+        System.out.println("---------------------");
         for (int i = 0; i < groupList.size(); i++) {
             //System.out.println(groupList.get(i).getGroupDetail().getCreaterAccount() + " " + createrUserName);
             if ( (groupList.get(i).getGroupDetail().getGroupName().equals(groupName)) && 
                 (groupList.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(createrUserName)) 
                 ) {
                 members.add(groupList.get(i));
+                System.out.println(groupList.get(i).getUserAccount().getUserName());
             }
             
         }
+        System.out.println("---------------------");
         return members;
     }
     
+    public void update(){
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
+ 
+        // Store 1000 Point objects in the database:
+        em.getTransaction().begin();
+        
+        TypedQuery<GroupMember> query = em.createQuery("SELECT gMem FROM GroupMember gMem", GroupMember.class);
+        groupList = query.getResultList();
+        
+        odb.closeConnection();
+    }
 }

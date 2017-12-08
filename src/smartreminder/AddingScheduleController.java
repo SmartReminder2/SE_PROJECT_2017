@@ -22,7 +22,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javax.persistence.*;
+import static smartreminder.AddScheduleController.label;
 
 /**
  * FXML Controller class
@@ -39,8 +41,6 @@ public class AddingScheduleController implements Initializable {
     public static ObservableList<String> startTimelist = FXCollections.observableArrayList("00.00","00.30","01.00","01.30","02.00","02.30","03.00","03.30","04.00","04.30","05.00","05.30","06.00","06.30","07.00","07.30","08.00","08.30","09.00","09.30","10.00","10.30","11.00","11.30","12.00","12.30","13.00","13.30","14.00","14.30","15.00","15.30","16.00","16.30","17.00","17.30","18.00","18.30","19.00","19.30","20.00","20.30","21.00","21.30","22.00","22.30","23.00","23.30");
     public static ObservableList<String> finishTimelist = FXCollections.observableArrayList("00.30","01.00","01.30","02.00","02.30","03.00","03.30","04.00","04.30","05.00","05.30","06.00","06.30","07.00","07.30","08.00","08.30","09.00","09.30","10.00","10.30","11.00","11.30","12.00","12.30","13.00","13.30","14.00","14.30","15.00","15.30","16.00","16.30","17.00","17.30","18.00","18.30","19.00","19.30","20.00","20.30","21.00","21.30","22.00","22.30","23.00","23.30","00.00");
     public static ObservableList<String> preAlarmlist = FXCollections.observableArrayList("0","5","10","15","20","25","30");
-    @FXML
-    private Button save;
     @FXML
     private ComboBox<String> preAlarmList;
     @FXML
@@ -66,6 +66,9 @@ public class AddingScheduleController implements Initializable {
     private CheckBox checkAlarm;
     public static CheckBox tmpCheckAlarm;
     public static CheckBox tmpCheckRepeat;
+    @FXML
+    private Text labelHead;
+    static Text label;
     
     /**
      * Initializes the controller class.
@@ -79,16 +82,25 @@ public class AddingScheduleController implements Initializable {
         tmpPreAlarmList = preAlarmList;
         tmpCheckAlarm = checkAlarm;
         tmpCheckRepeat = checkRepeat;
+        label = labelHead;
     }    
     static void setInit()
     {
         tmpStartTime.setItems(startTimelist);
         tmpFinishTime.setItems(finishTimelist);
         tmpPreAlarmList.setItems(preAlarmlist);
-        
+        if(HomePageController.isPersonal)
+        {
+            label.setText("DAILY SCHEDULE");
+        }
+        else
+        {
+            label.setText("GROUP SCHEDULE");
+        } 
         //for personal
         if (HomePageController.isPersonal) {
             List<Schedule> list = SmartReminder.myCalendar.getSchedule(SmartReminder.beginTime, SmartReminder.myAccount);
+            //Edit
             if(tmpId != 0) {
                 for (int i = 0; i < list.size(); i++) {
                     if(list.get(i).getId() == tmpId) {
@@ -109,8 +121,7 @@ public class AddingScheduleController implements Initializable {
                             startTimeStr = startTimeStr.concat(list.get(i).getBeginTime().getMinutes()+"");
                         }
                         System.out.println(startTimeStr);
-                        //tmpStartTime.scrollTo(startTimeStr);
-
+                        
                         String finishTimeStr;
                         if(list.get(i).getFinishTime().getHours() < 10) {
                             finishTimeStr = "0".concat(list.get(i).getFinishTime().getHours()+"");
@@ -125,24 +136,40 @@ public class AddingScheduleController implements Initializable {
                             finishTimeStr = finishTimeStr.concat(list.get(i).getFinishTime().getMinutes()+"");
                         }
                         System.out.println(finishTimeStr);
-                        //tmpFinishTime.scrollTo(finishTimeStr);
+                        
+                        tmpStartTime.getSelectionModel().select(startTimeStr);
+                        tmpStartTime.scrollTo(startTimeStr);
+                        
+                        tmpFinishTime.getSelectionModel().select(finishTimeStr);
+                        tmpFinishTime.scrollTo(finishTimeStr);
+                        
+                        select_pre = list.get(i).getTimeBeforeAlert() + "";
+                        tmpPreAlarmList.getSelectionModel().select(select_pre);
+                        
+                        tmpCheckAlarm.setSelected(list.get(i).getIsAlert());
+                        tmpCheckRepeat.setSelected(list.get(i).getIsRepeat());
+                        
                     }
                 }
 
             }
+            //create
             else {
                 tmpScheduleName.setText("");
                 tmpDetail.setText("");
-                // edit
                 tmpPreAlarmList.setPromptText(preAlarmlist.get(0)); 
                 tmpPreAlarmList.setValue(preAlarmlist.get(0));
-                select_pre = tmpPreAlarmList.getValue();
+                tmpPreAlarmList.getSelectionModel().select(0);
+                select_pre = tmpPreAlarmList.getSelectionModel().getSelectedItem();
 
                 tmpStartTime.getSelectionModel().select(0);
                 tmpFinishTime.getSelectionModel().select(0);
+                tmpStartTime.scrollTo(0);
+                tmpFinishTime.scrollTo(0);
                 select_startTime = tmpStartTime.getSelectionModel().getSelectedItem();
                 select_finishTime = tmpFinishTime.getSelectionModel().getSelectedItem();
-
+                tmpCheckAlarm.setSelected(false);
+                tmpCheckRepeat.setSelected(false);
             }
         }
         //for Group
@@ -168,7 +195,6 @@ public class AddingScheduleController implements Initializable {
                             startTimeStr = startTimeStr.concat(list.get(i).getBeginTime().getMinutes()+"");
                         }
                         System.out.println(startTimeStr);
-                        //tmpStartTime.scrollTo(startTimeStr);
 
                         String finishTimeStr;
                         if(list.get(i).getFinishTime().getHours() < 10) {
@@ -184,7 +210,18 @@ public class AddingScheduleController implements Initializable {
                             finishTimeStr = finishTimeStr.concat(list.get(i).getFinishTime().getMinutes()+"");
                         }
                         System.out.println(finishTimeStr);
-                        //tmpFinishTime.scrollTo(finishTimeStr);
+                        
+                        tmpStartTime.getSelectionModel().select(startTimeStr);
+                        tmpStartTime.scrollTo(startTimeStr);
+                        
+                        tmpFinishTime.getSelectionModel().select(finishTimeStr);
+                        tmpFinishTime.scrollTo(finishTimeStr);
+                        
+                        select_pre = list.get(i).getTimeBeforeAlert() + "";
+                        tmpPreAlarmList.getSelectionModel().select(select_pre);
+                        
+                        tmpCheckAlarm.setSelected(list.get(i).getIsAlert());
+                        tmpCheckRepeat.setSelected(list.get(i).getIsRepeat());
                     }
                 }
 
@@ -192,13 +229,15 @@ public class AddingScheduleController implements Initializable {
             else {
                 tmpScheduleName.setText("");
                 tmpDetail.setText("");
-                // edit
                 tmpPreAlarmList.setPromptText(preAlarmlist.get(0)); 
                 tmpPreAlarmList.setValue(preAlarmlist.get(0));
-                select_pre = tmpPreAlarmList.getValue();
+                tmpPreAlarmList.getSelectionModel().select(0);
+                select_pre = tmpPreAlarmList.getSelectionModel().getSelectedItem();
 
                 tmpStartTime.getSelectionModel().select(0);
                 tmpFinishTime.getSelectionModel().select(0);
+                tmpStartTime.scrollTo(0);
+                tmpFinishTime.scrollTo(0);
                 select_startTime = tmpStartTime.getSelectionModel().getSelectedItem();
                 select_finishTime = tmpFinishTime.getSelectionModel().getSelectedItem();
 
@@ -236,8 +275,13 @@ public class AddingScheduleController implements Initializable {
         else {
             if (titleCheck) {
                 if (tmpId != 0) {
-
-                    SmartReminder.myCalendar.editSchedule();
+                    if (HomePageController.isPersonal) {
+                        SmartReminder.myCalendar.editSchedule();
+                    }
+                    else {
+                        SmartReminder.groupCalendar.editSchedule();
+                    }
+                    
                 }
                 else {
 
@@ -308,6 +352,7 @@ public class AddingScheduleController implements Initializable {
     private void backOnclick(ActionEvent event) {
         tmpId = 0;
         AddScheduleController.setTimeTable();
+        System.out.println("BACKKKKKKKKK");
         SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addSchedulePage);
     }
 
