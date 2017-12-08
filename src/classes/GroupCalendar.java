@@ -15,14 +15,14 @@ import smartreminder.*;
  *
  * @author kan
  */
-public class GroupCalendar extends Calendar {
+public class GroupCalendar{
     
     //create an object of PersonalCalendar
     private static GroupCalendar instance = new GroupCalendar();
     
-    private ArrayList<Schedule> scheduleList = new ArrayList<>();
+    //private ArrayList<Schedule> scheduleList = new ArrayList<>();
     
-    private List<Schedule> schedules;
+    private List<GroupSchedule> schedules;
     
     private boolean isAdding = true;
     
@@ -35,7 +35,7 @@ public class GroupCalendar extends Calendar {
         // Store 1000 Point objects in the database:
         em.getTransaction().begin();
         
-        TypedQuery<Schedule> query = em.createQuery("SELECT sch FROM Schedule sch", Schedule.class);
+        TypedQuery<GroupSchedule> query = em.createQuery("SELECT sch FROM GroupSchedule sch", GroupSchedule.class);
         schedules = query.getResultList();
         
         em.close();
@@ -49,8 +49,7 @@ public class GroupCalendar extends Calendar {
         return instance;
     }
     
-    @Override
-    public void addSchedule(Schedule schedule) {
+    public void addSchedule(GroupSchedule schedule) {
         isAdding = true;
         if(!schedules.isEmpty()) {
             if(isAvailable(schedule)) {
@@ -83,11 +82,10 @@ public class GroupCalendar extends Calendar {
         }
     }
     
-    @Override
     public void editSchedule() {
         isAdding = false;
         EntityManager em = SmartReminder.emf.createEntityManager();
-        Schedule sch = em.find(Schedule.class, AddingScheduleController.tmpId);
+        GroupSchedule sch = em.find(GroupSchedule.class, AddingScheduleController.tmpId);
         em.getTransaction().begin();
         
         String[] tmpStr = AddingScheduleController.tmpStartTime.getSelectionModel().getSelectedItem().split("\\.");
@@ -107,7 +105,7 @@ public class GroupCalendar extends Calendar {
         tmpSchId = sch.getId();
         //System.out.println("IDDDDDDDDDDD: " + sch.getId());
         
-        Schedule tmpSch = new Schedule(sch.getUserId(), AddingScheduleController.tmpScheduleName.getText(), AddingScheduleController.tmpDetail.getText(), tmpBegin, tmpFinish, Integer.parseInt(AddingScheduleController.select_pre), AddingScheduleController.tmpCheckRepeat.isSelected(), AddingScheduleController.tmpCheckAlarm.isSelected());
+        GroupSchedule tmpSch = new GroupSchedule(sch.getGroupId(), AddingScheduleController.tmpScheduleName.getText(), AddingScheduleController.tmpDetail.getText(), tmpBegin, tmpFinish, Integer.parseInt(AddingScheduleController.select_pre), AddingScheduleController.tmpCheckRepeat.isSelected(), AddingScheduleController.tmpCheckAlarm.isSelected());
         
         if(!schedules.isEmpty()) {
             if(isAvailable(tmpSch)) {
@@ -133,7 +131,7 @@ public class GroupCalendar extends Calendar {
                 sch.setIsAlert(AddingScheduleController.tmpCheckAlarm.isSelected());
 
                 long tmpSchId = sch.getId();
-                List<Schedule> list = SmartReminder.groupCalendar.getSchedule(sch.getBeginTime(), SmartReminder.myAccount);
+                List<GroupSchedule> list = getSchedule(sch.getBeginTime(), GroupPageController.tmpGroupDetail);
                 for (int i = 0; i < list.size(); i++) {
                     if(list.get(i).getId() == tmpSchId) {
                         list.get(i).setTitle(AddingScheduleController.tmpScheduleName.getText());
@@ -159,20 +157,19 @@ public class GroupCalendar extends Calendar {
         }
     }
     
-    @Override
-    public List<Schedule> getSchedule(Date schDate, UserAccount user) {
+    public List<GroupSchedule> getSchedule(Date schDate, GroupDetail group) {
         int date = schDate.getDate();
         int month = schDate.getMonth();
         int year = schDate.getYear();
         
         
         
-        ArrayList<Schedule> list = new ArrayList<>();
+        ArrayList<GroupSchedule> list = new ArrayList<>();
         //System.out.println(schedules.size());
         for (int i = 0; i < schedules.size(); i++) {
             //System.out.println(schedules.get(i).getBeginTime().getDay() + " " + date);
             if (schedules.get(i).getBeginTime().getDate()== date & schedules.get(i).getBeginTime().getMonth() == month & schedules.get(i).getBeginTime().getYear() == year) {
-                if (schedules.get(i).getUserId() == user.getId()) {
+                if (schedules.get(i).getGroupId() == group.getId()) {
                     list.add(schedules.get(i));
                 }
             }
@@ -182,7 +179,6 @@ public class GroupCalendar extends Calendar {
         return (List)list;
     }
     
-    @Override
     public void showSchedule() {
         for (int i = 0; i < schedules.size(); i++) {
             System.out.println(schedules.get(i).getTitle());
@@ -190,7 +186,7 @@ public class GroupCalendar extends Calendar {
         }
     }
     
-    private boolean isAvailable(Schedule schedule) {
+    private boolean isAvailable(GroupSchedule schedule) {
         
         boolean returnVal = true;
         int[] newSchedulePhase = new int[48];
@@ -207,7 +203,7 @@ public class GroupCalendar extends Calendar {
         System.out.println("");
         
         for (int i = 0; i < schedules.size(); i++) {
-            if (schedules.get(i).getUserId() == SmartReminder.myAccount.getId()) {
+            if (schedules.get(i).getGroupId() == SmartReminder.myAccount.getId()) {
                 int date = schedule.getBeginTime().getDate();
                 int month = schedule.getBeginTime().getMonth();
                 int year = schedule.getBeginTime().getYear();
@@ -422,7 +418,7 @@ public class GroupCalendar extends Calendar {
         return phase;
     }
     
-    public ArrayList getAllSchedules(String groupName, String createrUserName) {
+    public ArrayList getMemberSchedules(String groupName, String createrUserName) {
 
         ArrayList<GroupMember> members = SmartReminder.myGroupServices.getMembers(groupName, createrUserName);
         

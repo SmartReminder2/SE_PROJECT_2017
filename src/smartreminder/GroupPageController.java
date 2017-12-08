@@ -77,7 +77,7 @@ public class GroupPageController implements Initializable {
     @FXML
     private Label FndInGpNameDelete_label;
     
-    static GroupDetail tmpGroupDetail;
+    public static GroupDetail tmpGroupDetail;
     
     static String createrUsername = new String();
     
@@ -121,7 +121,16 @@ public class GroupPageController implements Initializable {
                     account = fndList.get(i).getFriendAccount();
                 }
             }
-            tmpGroupDetail = new GroupDetail(select_GroupName, account);
+            
+            ArrayList<GroupMember> groups = SmartReminder.myGroupServices.getMyGroupList();
+            for (int i = 0; i < groups.size(); i++) {
+                if (groups.get(i).getGroupDetail().getGroupName().equals(GroupPageController.select_GroupName) && 
+                    groups.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(GroupPageController.createrUsername)) 
+                {
+                    tmpGroupDetail = groups.get(i).getGroupDetail();
+                }
+            }
+            //tmpGroupDetail = new GroupDetail(select_GroupName, account);
             if (tmpGroupDetail != null) {
                 updateFriendInList();
             }

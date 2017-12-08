@@ -5,6 +5,8 @@
  */
 package smartreminder;
 
+import classes.GroupMember;
+import classes.GroupSchedule;
 import classes.PersonalCalendar;
 import classes.Schedule;
 import java.awt.event.ActionListener;
@@ -54,8 +56,7 @@ public class AddScheduleController implements Initializable {
         timeTable_paneTemp = timeTable_pane;
         // TODO
     }    
-    static void setTimeTable()
-    {
+    static void setTimeTable() {
 
         timeTable_paneTemp.getChildren().clear();
         timeTable_paneTemp.getChildren().add(SmartReminder.timeTablePage);
@@ -65,121 +66,319 @@ public class AddScheduleController implements Initializable {
         colorList.add(Color.ORANGE);
         colorList.add(Color.PALEGREEN);
         System.out.println("setTimeTable");
-        List<Schedule> list = new ArrayList<>();
         
+        //personal schedules
         if (HomePageController.isPersonal) {
-            list = SmartReminder.myCalendar.getSchedule(SmartReminder.beginTime, SmartReminder.myAccount);
-        }
-        else {
-            list = SmartReminder.groupCalendar.getAllSchedules(GroupPageController.select_GroupName, GroupPageController.createrUsername);
-        }
-        
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getTitle());
-            System.out.println("222");
-        }
-        
-        for (int j = 0; j < list.size(); j++) {
+            List<Schedule> list = new ArrayList<>();
+            list.addAll(SmartReminder.myCalendar.getSchedule(SmartReminder.beginTime, SmartReminder.myAccount));
             
-            int beginPhase = PersonalCalendar.getPhase(list.get(j).getBeginTime());
-            int finishPhase = PersonalCalendar.getPhase(list.get(j).getFinishTime());
-            if(finishPhase == 0) {
-                finishPhase = 48;
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(list.get(i).getTitle());
+                System.out.println("222");
             }
- 
-            int[] num = new int[48];
-            for (int i = beginPhase; i < finishPhase; i++) {
-                num[i] = 1;
-            }
-            /*for (int i = 0; i < num.length; i++) {
-                System.out.println(num[i]);
-            }*/
-            
-            int firstPos = beginPhase;
-            int lastPos = finishPhase - 1;
-            System.out.println(firstPos + " " + lastPos);
-            int height = 62;
-            for (int i = 0; i < 48; i++) {
 
-                if(num[i] == 1) {
-                    System.out.println(i);
-                    Rectangle rect = new Rectangle(xPos, yPos, 600, height);
-                    if (HomePageController.isPersonal) {
+            for (int j = 0; j < list.size(); j++) {
+
+                int beginPhase = PersonalCalendar.getPhase(list.get(j).getBeginTime());
+                int finishPhase = PersonalCalendar.getPhase(list.get(j).getFinishTime());
+                if(finishPhase == 0) {
+                    finishPhase = 48;
+                }
+
+                int[] num = new int[48];
+                for (int i = beginPhase; i < finishPhase; i++) {
+                    num[i] = 1;
+                }
+                /*for (int i = 0; i < num.length; i++) {
+                    System.out.println(num[i]);
+                }*/
+
+                int firstPos = beginPhase;
+                int lastPos = finishPhase - 1;
+                System.out.println(firstPos + " " + lastPos);
+                int height = 62;
+                for (int i = 0; i < 48; i++) {
+
+                    if(num[i] == 1) {
+                        System.out.println(i);
+                        Rectangle rect = new Rectangle(xPos, yPos, 600, height);
                         rect.setFill(colorList.get(j % 3));
+                        rect.setVisible(true);
+                        timeTable_paneTemp.getChildren().add(rect);
                     }
-                    else {
-                        rect.setFill(Color.GRAY);
-                    }
-                    rect.setVisible(true);
-                    timeTable_paneTemp.getChildren().add(rect);
-                }
 
-                if((i == Math.ceil((lastPos - firstPos)/2.0) + firstPos) && HomePageController.isPersonal) {
-                    /*String text = list.get(0).getTitle().substring(0, 8);
-                    text = text.concat(" ..");
-                    System.out.println(text);*/
-                    Button btn = new Button("EDIT");
-                    Label label = new Label(list.get(j).getTitle());
-                    label.setLayoutX(xPos + 10);
-                    label.setLayoutY(yPos - 20);
-                    label.setVisible(true);
-                    
-                    btn.setLayoutX(xPos + 10);
-                    btn.setLayoutY(yPos);
-                    btn.setVisible(true);
-                    
-                    timeTable_paneTemp.getChildren().add(btn);
-                    timeTable_paneTemp.getChildren().add(label);
-                    
-                    final long tmpI = list.get(j).getId();
-                    
-                    btn.setOnAction(new EventHandler<ActionEvent>()
-                    {
-                        @Override
-                        public void handle(ActionEvent e)
+                    if(i == Math.ceil((lastPos - firstPos)/2.0) + firstPos) {
+                        /*String text = list.get(0).getTitle().substring(0, 8);
+                        text = text.concat(" ..");
+                        System.out.println(text);*/
+                        Button btn = new Button("EDIT");
+                        Label label = new Label(list.get(j).getTitle());
+                        label.setLayoutX(xPos + 10);
+                        label.setLayoutY(yPos - 20);
+                        label.setVisible(true);
+
+                        btn.setLayoutX(xPos + 10);
+                        btn.setLayoutY(yPos);
+                        btn.setVisible(true);
+
+                        timeTable_paneTemp.getChildren().add(btn);
+                        timeTable_paneTemp.getChildren().add(label);
+
+                        final long tmpI = list.get(j).getId();
+
+                        btn.setOnAction(new EventHandler<ActionEvent>()
                         {
-                            System.out.println("Hello World" + tmpI);
-                            AddingScheduleController.tmpId = tmpI;
-                            AddingScheduleController.setInit();
-                            SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addingSchedulePage);
+                            @Override
+                            public void handle(ActionEvent e)
+                            {
+                                System.out.println("Hello World" + tmpI);
+                                AddingScheduleController.tmpId = tmpI;
+                                AddingScheduleController.setInit();
+                                SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addingSchedulePage);
+                            }
+
                         }
-                        
+
+                        );
+
+
+                        System.out.println(firstPos + " " + lastPos);
+                        System.out.println("btn" + i);
                     }
-                    
-                    );
-                    
-                    
-                    System.out.println(firstPos + " " + lastPos);
-                    System.out.println("btn" + i);
+
+                    if(i < 22) {
+                        if(i % 2 == 0) {
+                            yPos += height;
+                            height = 64;
+                        }
+                        else {
+                            yPos += height;
+                            height = 62;
+                        }
+                    }
+                    else {
+                        if(i % 2 == 0) {
+                            yPos += height;
+                            height = 63;
+                        }
+                        else {
+                            yPos += height;
+                            height = 61;
+                        }
+                    }
+                }
+                xPos = 208;
+                yPos = 3;
+            }
+        }
+        //group schedules
+        else {
+            List<GroupSchedule> list = new ArrayList<>();
+            list.addAll(SmartReminder.groupCalendar.getSchedule(SmartReminder.beginTime, GroupPageController.tmpGroupDetail));
+            
+            List<Schedule> memberSchedules = new ArrayList<>();
+            memberSchedules.addAll(SmartReminder.groupCalendar.getMemberSchedules(GroupPageController.select_GroupName, GroupPageController.createrUsername));
+            
+            //for group schedules
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(list.get(i).getTitle());
+                System.out.println("222");
+            }
+
+            for (int j = 0; j < list.size(); j++) {
+
+                int beginPhase = PersonalCalendar.getPhase(list.get(j).getBeginTime());
+                int finishPhase = PersonalCalendar.getPhase(list.get(j).getFinishTime());
+                if(finishPhase == 0) {
+                    finishPhase = 48;
                 }
 
-                if(i < 22) {
-                    if(i % 2 == 0) {
-                        yPos += height;
-                        height = 64;
+                int[] num = new int[48];
+                for (int i = beginPhase; i < finishPhase; i++) {
+                    num[i] = 1;
+                }
+                /*for (int i = 0; i < num.length; i++) {
+                    System.out.println(num[i]);
+                }*/
+
+                int firstPos = beginPhase;
+                int lastPos = finishPhase - 1;
+                System.out.println(firstPos + " " + lastPos);
+                int height = 62;
+                for (int i = 0; i < 48; i++) {
+
+                    if(num[i] == 1) {
+                        System.out.println(i);
+                        Rectangle rect = new Rectangle(xPos, yPos, 600, height);
+                        rect.setFill(colorList.get(j % 3));
+                        rect.setVisible(true);
+                        timeTable_paneTemp.getChildren().add(rect);
+                    }
+
+                    if(i == Math.ceil((lastPos - firstPos)/2.0) + firstPos) {
+                        /*String text = list.get(0).getTitle().substring(0, 8);
+                        text = text.concat(" ..");
+                        System.out.println(text);*/
+                        Button btn = new Button("EDIT");
+                        Label label = new Label(list.get(j).getTitle());
+                        label.setLayoutX(xPos + 10);
+                        label.setLayoutY(yPos - 20);
+                        label.setVisible(true);
+
+                        btn.setLayoutX(xPos + 10);
+                        btn.setLayoutY(yPos);
+                        btn.setVisible(true);
+
+                        timeTable_paneTemp.getChildren().add(btn);
+                        timeTable_paneTemp.getChildren().add(label);
+
+                        final long tmpI = list.get(j).getId();
+
+                        btn.setOnAction(new EventHandler<ActionEvent>()
+                        {
+                            @Override
+                            public void handle(ActionEvent e)
+                            {
+                                System.out.println("Hello World" + tmpI);
+                                AddingScheduleController.tmpId = tmpI;
+                                AddingScheduleController.setInit();
+                                SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addingSchedulePage);
+                            }
+
+                        }
+
+                        );
+
+
+                        System.out.println(firstPos + " " + lastPos);
+                        System.out.println("btn" + i);
+                    }
+
+                    if(i < 22) {
+                        if(i % 2 == 0) {
+                            yPos += height;
+                            height = 64;
+                        }
+                        else {
+                            yPos += height;
+                            height = 62;
+                        }
                     }
                     else {
-                        yPos += height;
-                        height = 62;
+                        if(i % 2 == 0) {
+                            yPos += height;
+                            height = 63;
+                        }
+                        else {
+                            yPos += height;
+                            height = 61;
+                        }
                     }
                 }
-                else {
-                    if(i % 2 == 0) {
-                        yPos += height;
-                        height = 63;
-                    }
-                    else {
-                        yPos += height;
-                        height = 61;
-                    }
-                }
+                xPos = 208;
+                yPos = 3;
             }
-            xPos = 208;
-            yPos = 3;
+            
+            //for member schedules
+            for (int i = 0; i < memberSchedules.size(); i++) {
+                System.out.println(memberSchedules.get(i).getTitle());
+                System.out.println("222");
+            }
+
+            for (int j = 0; j < memberSchedules.size(); j++) {
+
+                int beginPhase = PersonalCalendar.getPhase(memberSchedules.get(j).getBeginTime());
+                int finishPhase = PersonalCalendar.getPhase(memberSchedules.get(j).getFinishTime());
+                if(finishPhase == 0) {
+                    finishPhase = 48;
+                }
+
+                int[] num = new int[48];
+                for (int i = beginPhase; i < finishPhase; i++) {
+                    num[i] = 1;
+                }
+                /*for (int i = 0; i < num.length; i++) {
+                    System.out.println(num[i]);
+                }*/
+
+                int firstPos = beginPhase;
+                int lastPos = finishPhase - 1;
+                System.out.println(firstPos + " " + lastPos);
+                int height = 62;
+                for (int i = 0; i < 48; i++) {
+
+                    if(num[i] == 1) {
+                        System.out.println(i);
+                        Rectangle rect = new Rectangle(xPos, yPos, 600, height);
+                        rect.setFill(Color.GREY);
+                        rect.setVisible(true);
+                        timeTable_paneTemp.getChildren().add(rect);
+                    }
+
+                    /*if(i == Math.ceil((lastPos - firstPos)/2.0) + firstPos) {
+
+                        Button btn = new Button("EDIT");
+                        Label label = new Label(memberSchedules.get(j).getTitle());
+                        label.setLayoutX(xPos + 10);
+                        label.setLayoutY(yPos - 20);
+                        label.setVisible(true);
+
+                        btn.setLayoutX(xPos + 10);
+                        btn.setLayoutY(yPos);
+                        btn.setVisible(true);
+
+                        timeTable_paneTemp.getChildren().add(btn);
+                        timeTable_paneTemp.getChildren().add(label);
+
+                        final long tmpI = memberSchedules.get(j).getId();
+
+                        btn.setOnAction(new EventHandler<ActionEvent>()
+                        {
+                            @Override
+                            public void handle(ActionEvent e)
+                            {
+                                System.out.println("Hello World" + tmpI);
+                                AddingScheduleController.tmpId = tmpI;
+                                AddingScheduleController.setInit();
+                                SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addingSchedulePage);
+                            }
+
+                        }
+
+                        );
+
+
+                        System.out.println(firstPos + " " + lastPos);
+                        System.out.println("btn" + i);
+                    }*/
+
+                    if(i < 22) {
+                        if(i % 2 == 0) {
+                            yPos += height;
+                            height = 64;
+                        }
+                        else {
+                            yPos += height;
+                            height = 62;
+                        }
+                    }
+                    else {
+                        if(i % 2 == 0) {
+                            yPos += height;
+                            height = 63;
+                        }
+                        else {
+                            yPos += height;
+                            height = 61;
+                        }
+                    }
+                }
+                xPos = 208;
+                yPos = 3;
+            }
         }
         
-        
-        
+
     }
     
     @FXML

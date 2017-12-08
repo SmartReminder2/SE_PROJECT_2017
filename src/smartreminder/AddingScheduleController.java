@@ -5,8 +5,9 @@
  */
 package smartreminder;
 
-import classes.Schedule;
+import classes.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -85,64 +86,125 @@ public class AddingScheduleController implements Initializable {
         tmpFinishTime.setItems(finishTimelist);
         tmpPreAlarmList.setItems(preAlarmlist);
         
-        List<Schedule> list = SmartReminder.myCalendar.getSchedule(SmartReminder.beginTime, SmartReminder.myAccount);
-        if(tmpId != 0) {
-            for (int i = 0; i < list.size(); i++) {
-                if(list.get(i).getId() == tmpId) {
-                    tmpScheduleName.setText(list.get(i).getTitle());
-                    tmpDetail.setText(list.get(i).getDetail());
-                    
-                    String startTimeStr;
-                    if(list.get(i).getBeginTime().getHours() < 10) {
-                        startTimeStr = "0".concat(list.get(i).getBeginTime().getHours()+"");
-                    }
-                    else
-                        startTimeStr = list.get(i).getBeginTime().getHours()+"";
-                    startTimeStr = startTimeStr.concat(".");
-                    if(list.get(i).getBeginTime().getMinutes()< 10) {
-                        startTimeStr = startTimeStr.concat("0".concat(list.get(i).getBeginTime().getMinutes()+""));
-                    }
-                    else {
-                        startTimeStr = startTimeStr.concat(list.get(i).getBeginTime().getMinutes()+"");
-                    }
-                    System.out.println(startTimeStr);
-                    //tmpStartTime.scrollTo(startTimeStr);
-                    
-                    String finishTimeStr;
-                    if(list.get(i).getFinishTime().getHours() < 10) {
-                        finishTimeStr = "0".concat(list.get(i).getFinishTime().getHours()+"");
-                    }
-                    else
-                        finishTimeStr = list.get(i).getFinishTime().getHours()+"";
-                    finishTimeStr = finishTimeStr.concat(".");
-                    if(list.get(i).getFinishTime().getMinutes()< 10) {
-                        finishTimeStr = finishTimeStr.concat("0".concat(list.get(i).getFinishTime().getMinutes()+""));
-                    }
-                    else {
-                        finishTimeStr = finishTimeStr.concat(list.get(i).getFinishTime().getMinutes()+"");
-                    }
-                    System.out.println(finishTimeStr);
-                    //tmpFinishTime.scrollTo(finishTimeStr);
-                }
-            }
-            
-        }
-        else {
-            tmpScheduleName.setText("");
-            tmpDetail.setText("");
-            // edit
-            tmpPreAlarmList.setPromptText(preAlarmlist.get(0)); 
-            tmpPreAlarmList.setValue(preAlarmlist.get(0));
-            select_pre = tmpPreAlarmList.getValue();
-            
-            tmpStartTime.getSelectionModel().select(0);
-            tmpFinishTime.getSelectionModel().select(0);
-            select_startTime = tmpStartTime.getSelectionModel().getSelectedItem();
-            select_finishTime = tmpFinishTime.getSelectionModel().getSelectedItem();
+        //for personal
+        if (HomePageController.isPersonal) {
+            List<Schedule> list = SmartReminder.myCalendar.getSchedule(SmartReminder.beginTime, SmartReminder.myAccount);
+            if(tmpId != 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    if(list.get(i).getId() == tmpId) {
+                        tmpScheduleName.setText(list.get(i).getTitle());
+                        tmpDetail.setText(list.get(i).getDetail());
 
-            
-            //
+                        String startTimeStr;
+                        if(list.get(i).getBeginTime().getHours() < 10) {
+                            startTimeStr = "0".concat(list.get(i).getBeginTime().getHours()+"");
+                        }
+                        else
+                            startTimeStr = list.get(i).getBeginTime().getHours()+"";
+                        startTimeStr = startTimeStr.concat(".");
+                        if(list.get(i).getBeginTime().getMinutes()< 10) {
+                            startTimeStr = startTimeStr.concat("0".concat(list.get(i).getBeginTime().getMinutes()+""));
+                        }
+                        else {
+                            startTimeStr = startTimeStr.concat(list.get(i).getBeginTime().getMinutes()+"");
+                        }
+                        System.out.println(startTimeStr);
+                        //tmpStartTime.scrollTo(startTimeStr);
+
+                        String finishTimeStr;
+                        if(list.get(i).getFinishTime().getHours() < 10) {
+                            finishTimeStr = "0".concat(list.get(i).getFinishTime().getHours()+"");
+                        }
+                        else
+                            finishTimeStr = list.get(i).getFinishTime().getHours()+"";
+                        finishTimeStr = finishTimeStr.concat(".");
+                        if(list.get(i).getFinishTime().getMinutes()< 10) {
+                            finishTimeStr = finishTimeStr.concat("0".concat(list.get(i).getFinishTime().getMinutes()+""));
+                        }
+                        else {
+                            finishTimeStr = finishTimeStr.concat(list.get(i).getFinishTime().getMinutes()+"");
+                        }
+                        System.out.println(finishTimeStr);
+                        //tmpFinishTime.scrollTo(finishTimeStr);
+                    }
+                }
+
+            }
+            else {
+                tmpScheduleName.setText("");
+                tmpDetail.setText("");
+                // edit
+                tmpPreAlarmList.setPromptText(preAlarmlist.get(0)); 
+                tmpPreAlarmList.setValue(preAlarmlist.get(0));
+                select_pre = tmpPreAlarmList.getValue();
+
+                tmpStartTime.getSelectionModel().select(0);
+                tmpFinishTime.getSelectionModel().select(0);
+                select_startTime = tmpStartTime.getSelectionModel().getSelectedItem();
+                select_finishTime = tmpFinishTime.getSelectionModel().getSelectedItem();
+
+            }
         }
+        //for Group
+        else {
+            List<GroupSchedule> list = SmartReminder.groupCalendar.getSchedule(SmartReminder.beginTime, GroupPageController.tmpGroupDetail);
+            if(tmpId != 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    if(list.get(i).getId() == tmpId) {
+                        tmpScheduleName.setText(list.get(i).getTitle());
+                        tmpDetail.setText(list.get(i).getDetail());
+
+                        String startTimeStr;
+                        if(list.get(i).getBeginTime().getHours() < 10) {
+                            startTimeStr = "0".concat(list.get(i).getBeginTime().getHours()+"");
+                        }
+                        else
+                            startTimeStr = list.get(i).getBeginTime().getHours()+"";
+                        startTimeStr = startTimeStr.concat(".");
+                        if(list.get(i).getBeginTime().getMinutes()< 10) {
+                            startTimeStr = startTimeStr.concat("0".concat(list.get(i).getBeginTime().getMinutes()+""));
+                        }
+                        else {
+                            startTimeStr = startTimeStr.concat(list.get(i).getBeginTime().getMinutes()+"");
+                        }
+                        System.out.println(startTimeStr);
+                        //tmpStartTime.scrollTo(startTimeStr);
+
+                        String finishTimeStr;
+                        if(list.get(i).getFinishTime().getHours() < 10) {
+                            finishTimeStr = "0".concat(list.get(i).getFinishTime().getHours()+"");
+                        }
+                        else
+                            finishTimeStr = list.get(i).getFinishTime().getHours()+"";
+                        finishTimeStr = finishTimeStr.concat(".");
+                        if(list.get(i).getFinishTime().getMinutes()< 10) {
+                            finishTimeStr = finishTimeStr.concat("0".concat(list.get(i).getFinishTime().getMinutes()+""));
+                        }
+                        else {
+                            finishTimeStr = finishTimeStr.concat(list.get(i).getFinishTime().getMinutes()+"");
+                        }
+                        System.out.println(finishTimeStr);
+                        //tmpFinishTime.scrollTo(finishTimeStr);
+                    }
+                }
+
+            }
+            else {
+                tmpScheduleName.setText("");
+                tmpDetail.setText("");
+                // edit
+                tmpPreAlarmList.setPromptText(preAlarmlist.get(0)); 
+                tmpPreAlarmList.setValue(preAlarmlist.get(0));
+                select_pre = tmpPreAlarmList.getValue();
+
+                tmpStartTime.getSelectionModel().select(0);
+                tmpFinishTime.getSelectionModel().select(0);
+                select_startTime = tmpStartTime.getSelectionModel().getSelectedItem();
+                select_finishTime = tmpFinishTime.getSelectionModel().getSelectedItem();
+
+            }
+        }
+        
         
     }
     @FXML
@@ -194,11 +256,28 @@ public class AddingScheduleController implements Initializable {
                     System.out.println(SmartReminder.finishTime.getHours() + " " + SmartReminder.finishTime.getMinutes());
 
                     //wait isAlarm argument
-                    Schedule schedule = new Schedule(SmartReminder.myAccount.getId(), scheduleName.getText(), detail.getText(), SmartReminder.beginTime, SmartReminder.finishTime, Integer.parseInt(select_pre), tmpCheckRepeat.isSelected(), tmpCheckAlarm.isSelected());
+                    if(HomePageController.isPersonal) {
+                        Schedule schedule = new Schedule(SmartReminder.myAccount.getId(), scheduleName.getText(), detail.getText(), SmartReminder.beginTime, SmartReminder.finishTime, Integer.parseInt(select_pre), tmpCheckRepeat.isSelected(), tmpCheckAlarm.isSelected());
 
-                    SmartReminder.myCalendar.addSchedule(schedule);
+                        SmartReminder.myCalendar.addSchedule(schedule);
 
-                    SmartReminder.myCalendar.showSchedule();
+                        SmartReminder.myCalendar.showSchedule();
+                    }
+                    else {
+                        ArrayList<GroupMember> list = SmartReminder.myGroupServices.getMyGroupList();
+                        long tmpGroupId = 0;
+                        for (int i = 0; i < list.size(); i++) {
+                            if (list.get(i).getGroupDetail().getGroupName().equals(GroupPageController.select_GroupName) && 
+                                    list.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(GroupPageController.createrUsername)) 
+                            {
+                                tmpGroupId = list.get(i).getGroupDetail().getId();
+                            }
+                            
+                        }
+                        GroupSchedule schedule = new GroupSchedule(tmpGroupId, scheduleName.getText(), detail.getText(), SmartReminder.beginTime, SmartReminder.finishTime, Integer.parseInt(select_pre), tmpCheckRepeat.isSelected(), tmpCheckAlarm.isSelected());
+                        SmartReminder.groupCalendar.addSchedule(schedule);
+                        SmartReminder.groupCalendar.showSchedule();
+                    }
                 }
 
                 System.out.println(scheduleName.getText());
