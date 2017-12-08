@@ -1,0 +1,370 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 10:31:15 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 3188@kan-PC
+
+[2017-12-07 10:31:15 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 10:34:57 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 3188@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 10:35:36 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 6380@kan-PC
+
+[2017-12-07 10:35:36 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 10:36:14 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 6380@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 13:19:25 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 3856@kan-PC
+
+[2017-12-07 13:19:25 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 13:19:42 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 3856@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:02:17 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:02:30 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:02:38 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:02:46 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:03:24 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:08:57 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:09:08 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:09:17 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 2308@kan-PC
+
+[2017-12-07 17:09:17 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 17:09:21 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 2308@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:09:23 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:09:44 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:09:50 #1 server] 
+java.net.BindException: Address already in use: NET_Bind
+	at java.base/java.net.DualStackPlainSocketImpl.bind0(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.bind(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at java.base/java.net.ServerSocket.<init>(Unknown Source)
+	at com.objectdb.o.SMR.I(SMR.java:260)
+	at com.objectdb.o.SMR.n(SMR.java:160)
+	at com.objectdb.o.TOL.run(TOL.java:117)
+	at com.objectdb.Server.runCommand(Server.java:193)
+	at com.objectdb.Server.run(Server.java:104)
+	at com.objectdb.Server.main(Server.java:63)
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 17:09:56 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 5236@kan-PC
+
+[2017-12-07 17:09:56 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 17:10:04 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 5236@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 22:09:21 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 5420@kan-PC
+
+[2017-12-07 22:09:21 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 22:10:04 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 5420@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 22:20:52 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 4168@kan-PC
+
+[2017-12-07 22:20:52 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 22:21:02 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 4168@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 22:39:18 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 4732@kan-PC
+
+[2017-12-07 22:39:18 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 22:39:55 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 4732@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 22:40:45 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 3424@kan-PC
+
+[2017-12-07 22:40:45 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 22:41:18 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 3424@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 22:41:28 #1 store] 
+Database 'D:\FinalSE\db\database.odb' is opened by 5320@kan-PC
+
+[2017-12-07 22:41:28 #2 store] 
+Configuration path: D:\FinalSE\objectdb-2.7.2_06\objectdb.conf
+
+[2017-12-07 22:41:53 #3 store] 
+Database 'D:\FinalSE\db\database.odb' is closed by 5320@kan-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 23:14:25 #1 explorer] 
+[ObjectDB 2.7.2_06] javax.persistence.PersistenceException
+Failed to connect to server 161.246.6.212:80 (connect timed out) (error 522)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.desktop/java.awt.EventQueue.access$500(Unknown Source)
+	at java.desktop/java.awt.EventQueue$3.run(Unknown Source)
+	at java.desktop/java.awt.EventQueue$3.run(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.run(Unknown Source)
+Caused by: com.objectdb.o.UserException: Failed to connect to server 161.246.6.212:80 (connect timed out)
+	at com.objectdb.o.MSG.d(MSG.java:77)
+	at com.objectdb.o.CLS.M(CLS.java:155)
+	at com.objectdb.o.CST.<init>(CST.java:79)
+	at com.objectdb.o.CSF.Vi(CSF.java:90)
+	at com.objectdb.o.OMF.am(OMF.java:707)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:150)
+	... 17 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at com.objectdb.o.CLS.M(CLS.java:123)
+	... 21 more
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2017-12-07 23:21:20 #1 explorer] 
+[ObjectDB 2.7.2_06] javax.persistence.PersistenceException
+Failed to connect to server 161.246.6.212:80 (connect timed out) (error 522)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(Unknown Source)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.desktop/java.awt.EventQueue.access$500(Unknown Source)
+	at java.desktop/java.awt.EventQueue$3.run(Unknown Source)
+	at java.desktop/java.awt.EventQueue$3.run(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.desktop/java.awt.EventDispatchThread.run(Unknown Source)
+Caused by: com.objectdb.o.UserException: Failed to connect to server 161.246.6.212:80 (connect timed out)
+	at com.objectdb.o.MSG.d(MSG.java:77)
+	at com.objectdb.o.CLS.M(CLS.java:155)
+	at com.objectdb.o.CST.<init>(CST.java:79)
+	at com.objectdb.o.CSF.Vi(CSF.java:90)
+	at com.objectdb.o.OMF.am(OMF.java:707)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:150)
+	... 17 more
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at java.base/java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.base/java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at com.objectdb.o.CLS.M(CLS.java:123)
+	... 21 more
+
