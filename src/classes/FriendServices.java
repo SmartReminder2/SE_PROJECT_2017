@@ -23,8 +23,11 @@ public class FriendServices {
     
     //make the constructor private so that this class cannot be instantiated
     private FriendServices(){
-    
-        EntityManager em = SmartReminder.emf.createEntityManager();
+        
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
  
         // Store 1000 Point objects in the database:
         em.getTransaction().begin();
@@ -32,8 +35,7 @@ public class FriendServices {
         TypedQuery<Friend> query = em.createQuery("SELECT fnd FROM Friend fnd", Friend.class);
         friendList = query.getResultList();
         
-        em.close();
-        
+        odb.closeConnection();
     }
     
     //Get the only object available
@@ -52,12 +54,15 @@ public class FriendServices {
         }
         
         if (isValid) {
-            EntityManager em = SmartReminder.emf.createEntityManager();
+            ObjectDBServices odb = new ObjectDBServices();
+            EntityManager em = odb.openConnection();
+            //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+            //EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
             em.persist(friend);
             em.getTransaction().commit();
             // Close the database connection:
-            em.close();
+            odb.closeConnection();
 
             friendList.add(friend);
             System.out.println("Adding friend success!!");
@@ -68,14 +73,17 @@ public class FriendServices {
     }
     
     public void delete(Friend friend) {
-        EntityManager em = SmartReminder.emf.createEntityManager();
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
         Friend fnd = em.find(Friend.class, friend.getId());
  
         em.getTransaction().begin();
         em.remove(fnd);
         em.getTransaction().commit();
         // Close the database connection:
-        em.close();
+        odb.closeConnection();
         friendList.remove(friend);
     }
     
@@ -83,7 +91,10 @@ public class FriendServices {
         
         ArrayList<UserAccount> returnList = new ArrayList<>();
         
-        EntityManager em = SmartReminder.emf.createEntityManager();
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
  
         // Store 1000 Point objects in the database:
         em.getTransaction().begin();
@@ -91,7 +102,7 @@ public class FriendServices {
         TypedQuery<UserAccount> query = em.createQuery("SELECT user FROM UserAccount user", UserAccount.class);
         List<UserAccount> userList = query.getResultList();
         
-        em.close();
+        odb.closeConnection();
         
         for (int i = 0; i < userList.size(); i++) {
             if(userList.get(i).getUserName().equals(userName)) {
@@ -133,5 +144,20 @@ public class FriendServices {
             check = true;
         }
         return list;
+    }
+    
+    public void update(){
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
+ 
+        // Store 1000 Point objects in the database:
+        em.getTransaction().begin();
+        
+        TypedQuery<Friend> query = em.createQuery("SELECT fnd FROM Friend fnd", Friend.class);
+        friendList = query.getResultList();
+        
+        odb.closeConnection();
     }
 }

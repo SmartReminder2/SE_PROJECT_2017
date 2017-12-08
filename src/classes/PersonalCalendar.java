@@ -32,7 +32,10 @@ public class PersonalCalendar extends Calendar {
     //make the constructor private so that this class cannot be instantiated
     private PersonalCalendar(){
         
-        EntityManager em = SmartReminder.emf.createEntityManager();
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
  
         // Store 1000 Point objects in the database:
         em.getTransaction().begin();
@@ -40,7 +43,7 @@ public class PersonalCalendar extends Calendar {
         TypedQuery<Schedule> query = em.createQuery("SELECT sch FROM Schedule sch", Schedule.class);
         schedules = query.getResultList();
         
-        em.close();
+        odb.closeConnection();
         //SmartReminder.emf.close();
         
         System.out.println("Construction Success!!");
@@ -62,7 +65,7 @@ public class PersonalCalendar extends Calendar {
         for (int i = 0; i < newSchedulePhase.length; i++) {
             System.out.print(newSchedulePhase[i]);
         }
-        System.out.println("id: " + schedule.getId());
+        System.out.println("id: " + tmpSchId);
         System.out.println("BeginPhase: " + getPhase(schedule.getBeginTime()));
         System.out.println("FinPhase: " + getPhase(schedule.getFinishTime()));
         System.out.println("");
@@ -76,7 +79,7 @@ public class PersonalCalendar extends Calendar {
                     if (!isAdding && schedules.get(i).getId() == tmpSchId) {
                         System.out.println("skip this overlab for editting");
                     }
-                    else if ( isAdding || (!isAdding && schedules.get(i).getId() != schedule.getId()) ) {
+                    else if ( isAdding || (!isAdding && schedules.get(i).getId() != tmpSchId) ) {
                         int[] schedulePhase = new int[48];
                         for (int j = 0; j < schedulePhase.length; j++) {
                             if(j==0)
@@ -286,14 +289,18 @@ public class PersonalCalendar extends Calendar {
     @Override
     public void addSchedule(Schedule schedule) {
         isAdding = true;
+        tmpSchId = 0;
         if(!schedules.isEmpty()) {
             if(isAvailable(schedule)) {
-                EntityManager em = SmartReminder.emf.createEntityManager();
+                ObjectDBServices odb = new ObjectDBServices();
+                EntityManager em = odb.openConnection();
+                //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+                //EntityManager em = emf.createEntityManager();
                 em.getTransaction().begin();
                 em.persist(schedule);
                 em.getTransaction().commit();
                 // Close the database connection:
-                em.close();
+                odb.closeConnection();
                 //SmartReminder.emf.close();
                 schedules.add(schedule);
             }
@@ -305,12 +312,15 @@ public class PersonalCalendar extends Calendar {
         }
         else {
             System.out.println(schedule.getTitle() + " is the first schedule.");
-            EntityManager em = SmartReminder.emf.createEntityManager();
+            ObjectDBServices odb = new ObjectDBServices();
+            EntityManager em = odb.openConnection();
+            //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+            //EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
             em.persist(schedule);
             em.getTransaction().commit();
             // Close the database connection:
-            em.close();
+            odb.closeConnection();
             //SmartReminder.emf.close();
             schedules.add(schedule);
             System.out.println("Adding success!!!");
@@ -320,7 +330,10 @@ public class PersonalCalendar extends Calendar {
     @Override
     public void editSchedule() {
         isAdding = false;
-        EntityManager em = SmartReminder.emf.createEntityManager();
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
         Schedule sch = em.find(Schedule.class, AddingScheduleController.tmpId);
         em.getTransaction().begin();
         
@@ -345,6 +358,7 @@ public class PersonalCalendar extends Calendar {
         
         if(!schedules.isEmpty()) {
             if(isAvailable(tmpSch)) {
+                System.out.println("Able to edit schedule!!");
                 String[] str = AddingScheduleController.tmpStartTime.getSelectionModel().getSelectedItem().split("\\.");
                 int beginHrs = Integer.parseInt(str[0]);
                 int beginMins = Integer.parseInt(str[1]);
@@ -383,11 +397,10 @@ public class PersonalCalendar extends Calendar {
                 }
 
                 em.getTransaction().commit();
-                em.close();
+                odb.closeConnection();
             }
             else {
-                em.getTransaction().commit();
-                em.close();
+                odb.closeConnection();
                 System.out.println(sch.getTitle() + " schedule is Overlap. (updating)");
             }
         }
@@ -410,7 +423,7 @@ public class PersonalCalendar extends Calendar {
                 }
             }
         }
-        System.out.println(list.toString());
+        //System.out.println(list.toString());
          
         return (List)list;
     }
@@ -427,11 +440,27 @@ public class PersonalCalendar extends Calendar {
         schedules = query.getResultList();
         
         em.close();
+        emf.close();
         //SmartReminder.emf.close();*/
         
         for (int i = 0; i < schedules.size(); i++) {
             System.out.println(schedules.get(i).getTitle());
             System.out.println(schedules.get(i).getDetail());
         }
+    }
+    
+    public void update(){
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
+ 
+        // Store 1000 Point objects in the database:
+        em.getTransaction().begin();
+        
+        TypedQuery<Schedule> query = em.createQuery("SELECT sch FROM Schedule sch", Schedule.class);
+        schedules = query.getResultList();
+        
+        odb.closeConnection();
     }
 }
