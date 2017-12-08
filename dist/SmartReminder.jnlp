@@ -8,8 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="SmartReminder.jar" size="504445" download="eager" />
-    <jar href="lib\objectdb.jar" size="1496990" download="eager" />
+    <jar href="SmartReminder.jar" size="1600910" download="eager" />
+    <jar href="lib\jfoenix.jar" size="2414497" download="eager" />
+    <jar href="lib\objectdb.jar" size="1497000" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="SmartReminder" >
     <param name="requiredFXVersion" value="8.0+"/>

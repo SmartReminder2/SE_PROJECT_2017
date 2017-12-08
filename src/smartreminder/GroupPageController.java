@@ -38,12 +38,6 @@ public class GroupPageController implements Initializable {
     private Pane friendListPane;
     @FXML
     private TextField groupName;
-    @FXML
-    private Pane selectCal_Pane;
-    @FXML
-    private ComboBox<?> year_list;
-    @FXML
-    private ComboBox<?> month_list;
     
     static public ListView<String> tmpFriend_list;
     static public ListView<String> tmpFriendInGroup_list;
@@ -77,7 +71,7 @@ public class GroupPageController implements Initializable {
     @FXML
     private Label FndInGpNameDelete_label;
     
-    static GroupDetail tmpGroupDetail;
+    public static GroupDetail tmpGroupDetail;
     
     static String createrUsername = new String();
     
@@ -121,7 +115,16 @@ public class GroupPageController implements Initializable {
                     account = fndList.get(i).getFriendAccount();
                 }
             }
-            tmpGroupDetail = new GroupDetail(select_GroupName, account);
+            
+            ArrayList<GroupMember> groups = SmartReminder.myGroupServices.getMyGroupList();
+            for (int i = 0; i < groups.size(); i++) {
+                if (groups.get(i).getGroupDetail().getGroupName().equals(GroupPageController.select_GroupName) && 
+                    groups.get(i).getGroupDetail().getCreaterAccount().getUserName().equals(GroupPageController.createrUsername)) 
+                {
+                    tmpGroupDetail = groups.get(i).getGroupDetail();
+                }
+            }
+            //tmpGroupDetail = new GroupDetail(select_GroupName, account);
             if (tmpGroupDetail != null) {
                 updateFriendInList();
             }
@@ -206,13 +209,6 @@ public class GroupPageController implements Initializable {
  
     }
     
-    @FXML
-    private void list_Action(ActionEvent event) {
-    }
-
-    @FXML
-    private void mlist_Action(ActionEvent event) {
-    }
     
     @FXML
     private void createGroup(ActionEvent event) {
@@ -292,5 +288,6 @@ public class GroupPageController implements Initializable {
             System.out.print("5555");*/
         }
     }
+
   
 }

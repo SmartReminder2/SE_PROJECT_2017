@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.persistence.*;
+import javax.swing.Timer;
 
 /**
  *
@@ -35,15 +36,17 @@ public class SmartReminder extends Application {
     public static Stage primaryStage;
     public static Pane primaryPane;
     public static Pane secondaryPane;
-    
-    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+    //public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb://161.246.6.212:80/database.odb;user=admin;password=admin");
+    //public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
     public static PersonalCalendar myCalendar = PersonalCalendar.getInstance();
     public static GroupCalendar groupCalendar = GroupCalendar.getInstance();
     public static FriendServices myFriendServices = FriendServices.getInstance();
     public static GroupServices myGroupServices = GroupServices.getInstance();
+    public static UserAccountServices myUserAccountServices = new UserAccountServices();
     public static UserAccount myAccount;
     public static Date beginTime;
     public static Date finishTime;
+    public static Timer tmpT;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -91,8 +94,9 @@ public class SmartReminder extends Application {
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 // Do what you want when the application is stopping
+                tmpT.stop();
                 System.out.println("asdas");
-                emf.close();
+                //emf.close();
             }
         }));
         

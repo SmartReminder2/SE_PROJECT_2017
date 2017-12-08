@@ -5,8 +5,11 @@
  */
 package smartreminder;
 
-import classes.UserAccount;
+import classes.*;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -18,9 +21,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import javax.persistence.*;
+import javax.swing.Timer;
 
 /**
  * FXML Controller class
@@ -41,7 +47,7 @@ public class FillIdPasswordController implements Initializable {
     static public PasswordField changpassword_field;
     
     
-    private List<UserAccount> users;
+    public static List<UserAccount> users;
     @FXML
     private Label sign_up;
     @FXML
@@ -76,17 +82,65 @@ public class FillIdPasswordController implements Initializable {
     private Circle circle16;
     @FXML
     private Circle circle15;
-
+    static public String time;
+    
+    Boolean isAlarm = false;
+    Timer t = new javax.swing.Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent ae) {
+            List<Schedule> schedules = SmartReminder.myCalendar.getSchedule(new Date(), SmartReminder.myAccount);
+            for (int i = 0; i < schedules.size(); i++) {
+                if (schedules.get(i).getBeginTime().getHours() == new Date().getHours()
+                && schedules.get(i).getBeginTime().getMinutes() == new Date().getMinutes()
+                && schedules.get(i).getIsAlert()) 
+                {
+                    System.out.println(schedules.get(i).getTitle());
+                    if (!isAlarm) {
+                        playSound("alarm.wav");
+                        isAlarm = true;
+                    }
+                }
+                else {
+                    if (isAlarm) {
+                        stopSound();
+                        isAlarm = false;
+                    }
+                }
+            }
+            //System.out.println(new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
+        }
+       });
+    
+    Media soundM;
+    MediaPlayer sound;
+    public void playSound(String url)
+    { 
+        soundM = new Media(new File("src/Sound/"+url).toURI().toString());
+        sound = new MediaPlayer(soundM);
+        sound.setVolume(1.0);
+        sound.setCycleCount(MediaPlayer.INDEFINITE);
+        sound.play();
+        
+    }
+    public void stopSound() {
+        sound.stop();
+    }
+    
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         changeid_field = id_field;
         changpassword_field = password_field;
+        SmartReminder.tmpT = t;
         
-        EntityManager em = SmartReminder.emf.createEntityManager();
+        ObjectDBServices odb = new ObjectDBServices();
+        EntityManager em = odb.openConnection();
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
+        //EntityManager em = emf.createEntityManager();
  
         // Store 1000 Point objects in the database:
         em.getTransaction().begin();
@@ -94,7 +148,7 @@ public class FillIdPasswordController implements Initializable {
         TypedQuery<UserAccount> query = em.createQuery("SELECT user FROM UserAccount user", UserAccount.class);
         users = query.getResultList();
         
-        em.close();
+        odb.closeConnection();
         //SmartReminder.emf.close();
         animation_circle(circle1,1.0,0.1,1800);
         animation_circle(circle2,1.0,0.1,1800);
@@ -130,6 +184,14 @@ public class FillIdPasswordController implements Initializable {
                 HomePageController.updateFriendList();
                 HomePageController.updateSearchedUserList();
                 HomePageController.updateFriendRequest();
+                t.start();
+                HomePageController.isPersonal = true;
+                SmartReminder.myCalendar.update();
+                SmartReminder.groupCalendar.update();
+                SmartReminder.myFriendServices.update();
+                SmartReminder.myGroupServices.update();
+                SmartReminder.myUserAccountServices.update();
+                
                 SmartReminder.primaryStage.getScene().setRoot(SmartReminder.homePage);
                 return;
             }
@@ -158,4 +220,5 @@ public class FillIdPasswordController implements Initializable {
         ft.play();
     }
     
+
 }
