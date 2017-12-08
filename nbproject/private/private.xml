@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/FinalSE/src/classes/PersonalCalendar.java</file>
-            <file>file:/D:/FinalSE/src/classes/UserAccountServices.java</file>
-            <file>file:/D:/FinalSE/src/smartreminder/SignUpController.java</file>
-            <file>file:/D:/FinalSE/src/smartreminder/FillIdPasswordController.java</file>
-            <file>file:/D:/FinalSE/src/classes/GroupServices.java</file>
-            <file>file:/D:/FinalSE/src/smartreminder/HomePageController.java</file>
-            <file>file:/D:/FinalSE/src/smartreminder/SmartReminder.java</file>
-            <file>file:/D:/FinalSE/src/smartreminder/AddingScheduleController.java</file>
-            <file>file:/D:/FinalSE/src/classes/GroupCalendar.java</file>
-            <file>file:/D:/FinalSE/src/smartreminder/AddScheduleController.java</file>
-            <file>file:/D:/FinalSE/src/classes/ObjectDBServices.java</file>
-            <file>file:/D:/FinalSE/src/classes/FriendServices.java</file>
-            <file>file:/D:/FinalSE/src/smartreminder/GroupPageController.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

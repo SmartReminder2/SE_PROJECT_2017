@@ -6,9 +6,10 @@
 package smartreminder;
 
 
-import classes.*;
-import com.jfoenix.controls.JFXButton;
-import java.awt.event.ActionListener;
+import classes.Friend;
+import classes.FriendServices;
+import classes.PersonalCalendar;
+import classes.UserAccount;
 import java.net.URL;
 
 import java.text.DateFormatSymbols;
@@ -30,7 +31,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
 import javafx.scene.Node;
@@ -41,8 +41,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -255,6 +253,7 @@ public class HomePageController implements Initializable {
     @FXML
     private Rectangle dayBlock42;
     private Label labelToday;
+    @FXML
     private Label label_Today;
     @FXML
     private ListView<String> friend_list;
@@ -265,6 +264,7 @@ public class HomePageController implements Initializable {
     String select_Friendname;
     @FXML
     private Pane main_pane;
+    @FXML
     private Pane selectCal_Pane;
     @FXML
     private Pane deleteFriend_pane;
@@ -277,28 +277,22 @@ public class HomePageController implements Initializable {
     @FXML
     private ListView<String> searchedUser_list;
     @FXML
+    private Button addFndBtn;
+    @FXML
     private ListView<String> friendRequest_list;
+    @FXML
+    private Button acceptBtn;
+    @FXML
+    private Button DeclineBtn;
     
     public static boolean isPersonal = true;
-    @FXML
-    private JFXButton showCurrentYear;
-    @FXML
-    private JFXButton showCurrentMonth;
-    @FXML
-    private JFXButton showCurrenDate;
-    @FXML
-    private Pane selectCalPane;
-    @FXML
-    private ImageView picLogout;
  
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {  
-       
-        Image img = new Image("file:src/Image/logout.png");
-        picLogout.setImage(img);
+        //year_list.setItem()
         for (int i = 1900; i < 2100; i++) {
            list.add(i + "");
         }
@@ -307,11 +301,7 @@ public class HomePageController implements Initializable {
         month_list.setItems(list2); 
         SmartReminder.secondaryPane = main_pane;
         setInit();      
-        showCurrentMonth.setText(defaultMonth.substring(0, 3));
-        showCurrentYear.setText(year+"");
-        showCurrenDate.setText(current_day+"");
         
-    
     }
     
     @FXML
@@ -327,12 +317,10 @@ public class HomePageController implements Initializable {
         month = Month.valueOf(monthName.toUpperCase()).getValue();
         generateCalendar(--month,year);
     }
-    String defaultMonth; 
-    
-    
-    
+     
     void setInit()
     {  
+       
        //Set Friend List
         friend_list.setItems(friendList_name);
         searchedUser_list.setItems(userNameList);
@@ -345,12 +333,12 @@ public class HomePageController implements Initializable {
         year = c.get(Calendar.YEAR);
         current_year = year;
         current_month = month;
-        defaultMonth = new DateFormatSymbols().getMonths()[month];
+        String defaultMonth = new DateFormatSymbols().getMonths()[month];
         generateCalendar(month,year);
         month_list.setValue(defaultMonth);
         year_list.setValue(year);
         String date = "Today is "+current_day+" / "+defaultMonth+" / "+year ;
-      //  label_Today.setText(date);
+        label_Today.setText(date);
     }
     void generateCalendar(int month,int year){
        
@@ -445,6 +433,7 @@ public class HomePageController implements Initializable {
         FillIdPasswordController.changeid_field.setText("");
         FillIdPasswordController.changpassword_field.setText("");
         SmartReminder.secondaryPane.getChildren().clear();
+        selectCal_Pane.setVisible(true);
         friendListPane.setVisible(true);
         SmartReminder.primaryStage.getScene().setRoot(SmartReminder.loginPage);
        
@@ -492,6 +481,7 @@ public class HomePageController implements Initializable {
     void setPane(Parent page)
     {
         SmartReminder.secondaryPane.getChildren().clear();
+        selectCal_Pane.setVisible(false);
         friendListPane.setVisible(false);
         SmartReminder.secondaryPane.getChildren().add(page);
     }
@@ -505,32 +495,18 @@ public class HomePageController implements Initializable {
     private void personalMenu(ActionEvent event) {
         isPersonal = true;
         SmartReminder.secondaryPane.getChildren().clear();
+        selectCal_Pane.setVisible(true);
         friendListPane.setVisible(true);
-        
-        SmartReminder.myCalendar.update();
-        SmartReminder.groupCalendar.update();
-        SmartReminder.myFriendServices.update();
-        SmartReminder.myGroupServices.update();
-        SmartReminder.myUserAccountServices.update();
-        
         setInit();
     }
 
     @FXML
     private void groupMenu(ActionEvent event) {
         isPersonal = false;
-        
-        SmartReminder.myCalendar.update();
-        SmartReminder.groupCalendar.update();
-        SmartReminder.myFriendServices.update();
-        SmartReminder.myGroupServices.update();
-        SmartReminder.myUserAccountServices.update();
-        
         GroupPageController.updateGroupList();
         GroupPageController.friendInList_name.clear();
         updateFriendList();
         setInit();
-        GroupPageController.tmpGroupDetail = null;
         setPane(SmartReminder.groupPage);
     }
 
@@ -549,21 +525,9 @@ public class HomePageController implements Initializable {
             if(selectedDay >= current_day) {
                 SmartReminder.beginTime = new Date(current_year-1900, current_month, selectedDay, 0, 0);
                 SmartReminder.finishTime = new Date(current_year-1900, current_month, selectedDay, 0, 0);
+                SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addSchedulePage);
                 System.out.println("open");
-                if (isPersonal) {
-                    AddScheduleController.setTimeTable();
-                    SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addSchedulePage);
-                }
-                else {
-                    if (GroupPageController.tmpGroupDetail == null) {
-                        System.out.println("Pleaseeeeeee select group first!!");
-                    }
-                    else {
-                        AddScheduleController.setTimeTable();
-                        SmartReminder.primaryStage.getScene().setRoot(SmartReminder.addSchedulePage);
-                    }
-                }
-                
+                AddScheduleController.setTimeTable();
             }
         }
            
@@ -589,18 +553,6 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void declineFriendRequest(ActionEvent event) {
-    }
-
-    @FXML
-    private void update(ActionEvent event) {
-        SmartReminder.myCalendar.update();
-        SmartReminder.groupCalendar.update();
-        SmartReminder.myFriendServices.update();
-        SmartReminder.myGroupServices.update();
-        SmartReminder.myUserAccountServices.update();
-        GroupPageController.updateGroupList();
-        updateFriendRequest();
-        System.out.println("Refresh!!");
     }
 
 }

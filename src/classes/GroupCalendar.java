@@ -30,10 +30,7 @@ public class GroupCalendar{
     
     //make the constructor private so that this class cannot be instantiated
     private GroupCalendar(){
-        ObjectDBServices odb = new ObjectDBServices();
-        EntityManager em = odb.openConnection();
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
-        //EntityManager em = emf.createEntityManager();
+        EntityManager em = SmartReminder.emf.createEntityManager();
  
         // Store 1000 Point objects in the database:
         em.getTransaction().begin();
@@ -41,7 +38,7 @@ public class GroupCalendar{
         TypedQuery<GroupSchedule> query = em.createQuery("SELECT sch FROM GroupSchedule sch", GroupSchedule.class);
         schedules = query.getResultList();
         
-        odb.closeConnection();
+        em.close();
         //SmartReminder.emf.close();
         
         System.out.println("Construction Success!!");
@@ -54,18 +51,14 @@ public class GroupCalendar{
     
     public void addSchedule(GroupSchedule schedule) {
         isAdding = true;
-        tmpSchId = 0;
         if(!schedules.isEmpty()) {
             if(isAvailable(schedule)) {
-                ObjectDBServices odb = new ObjectDBServices();
-                EntityManager em = odb.openConnection();
-                //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
-                //EntityManager em = emf.createEntityManager();
+                EntityManager em = SmartReminder.emf.createEntityManager();
                 em.getTransaction().begin();
                 em.persist(schedule);
                 em.getTransaction().commit();
                 // Close the database connection:
-                odb.closeConnection();
+                em.close();
                 //SmartReminder.emf.close();
                 schedules.add(schedule);
             }
@@ -77,15 +70,12 @@ public class GroupCalendar{
         }
         else {
             System.out.println(schedule.getTitle() + " is the first schedule.");
-            ObjectDBServices odb = new ObjectDBServices();
-            EntityManager em = odb.openConnection();
-            //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
-            //EntityManager em = emf.createEntityManager();
+            EntityManager em = SmartReminder.emf.createEntityManager();
             em.getTransaction().begin();
             em.persist(schedule);
             em.getTransaction().commit();
             // Close the database connection:
-            odb.closeConnection();
+            em.close();
             //SmartReminder.emf.close();
             schedules.add(schedule);
             System.out.println("Adding success!!!");
@@ -94,10 +84,7 @@ public class GroupCalendar{
     
     public void editSchedule() {
         isAdding = false;
-        ObjectDBServices odb = new ObjectDBServices();
-        EntityManager em = odb.openConnection();
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
-        //EntityManager em = emf.createEntityManager();
+        EntityManager em = SmartReminder.emf.createEntityManager();
         GroupSchedule sch = em.find(GroupSchedule.class, AddingScheduleController.tmpId);
         em.getTransaction().begin();
         
@@ -160,11 +147,12 @@ public class GroupCalendar{
                 }
 
                 em.getTransaction().commit();
-                odb.closeConnection();
+                em.close();
             }
             else {
+                em.getTransaction().commit();
+                em.close();
                 System.out.println(sch.getTitle() + " schedule is Overlap. (updating)");
-                odb.closeConnection();
             }
         }
     }
@@ -177,12 +165,11 @@ public class GroupCalendar{
         
         
         ArrayList<GroupSchedule> list = new ArrayList<>();
-        System.out.println("SIZE: " + schedules.size());
+        //System.out.println(schedules.size());
         for (int i = 0; i < schedules.size(); i++) {
-            //System.out.println(schedules.get(i).getBeginTime().getDate() + " " + date);
-            if (schedules.get(i).getBeginTime().getDate()== date && schedules.get(i).getBeginTime().getMonth() == month && schedules.get(i).getBeginTime().getYear() == year) {
+            //System.out.println(schedules.get(i).getBeginTime().getDay() + " " + date);
+            if (schedules.get(i).getBeginTime().getDate()== date & schedules.get(i).getBeginTime().getMonth() == month & schedules.get(i).getBeginTime().getYear() == year) {
                 if (schedules.get(i).getGroupId() == group.getId()) {
-                    System.out.println("HIT!!!!");
                     list.add(schedules.get(i));
                 }
             }
@@ -210,13 +197,13 @@ public class GroupCalendar{
         for (int i = 0; i < newSchedulePhase.length; i++) {
             System.out.print(newSchedulePhase[i]);
         }
-        System.out.println("id: " + tmpSchId);
+        System.out.println("id: " + schedule.getId());
         System.out.println("BeginPhase: " + getPhase(schedule.getBeginTime()));
         System.out.println("FinPhase: " + getPhase(schedule.getFinishTime()));
         System.out.println("");
         
         for (int i = 0; i < schedules.size(); i++) {
-            if (schedules.get(i).getGroupId() == GroupPageController.tmpGroupDetail.getId()) {
+            if (schedules.get(i).getGroupId() == SmartReminder.myAccount.getId()) {
                 int date = schedule.getBeginTime().getDate();
                 int month = schedule.getBeginTime().getMonth();
                 int year = schedule.getBeginTime().getYear();
@@ -224,7 +211,7 @@ public class GroupCalendar{
                     if (!isAdding && schedules.get(i).getId() == tmpSchId) {
                         System.out.println("skip this overlab for editting");
                     }
-                    else if ( isAdding || (!isAdding && schedules.get(i).getId() != tmpSchId) ) {
+                    else if ( isAdding || (!isAdding && schedules.get(i).getId() != schedule.getId()) ) {
                         int[] schedulePhase = new int[48];
                         for (int j = 0; j < schedulePhase.length; j++) {
                             if(j==0)
@@ -449,18 +436,4 @@ public class GroupCalendar{
         return schedules;
     }
     
-    public void update(){
-        ObjectDBServices odb = new ObjectDBServices();
-        EntityManager em = odb.openConnection();
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
-        //EntityManager em = emf.createEntityManager();
- 
-        // Store 1000 Point objects in the database:
-        em.getTransaction().begin();
-        
-        TypedQuery<GroupSchedule> query = em.createQuery("SELECT sch FROM GroupSchedule sch", GroupSchedule.class);
-        schedules = query.getResultList();
-        
-        odb.closeConnection();
-    }
 }

@@ -5,7 +5,7 @@
  */
 package smartreminder;
 
-import classes.*;
+import classes.UserAccount;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -31,6 +31,10 @@ public class SignUpController implements Initializable {
 
     private TextField id_field;
     private PasswordField password_field;
+    @FXML
+    private Button signUp_buton;
+    @FXML
+    private Button back_button;
     
     public static String username;
     public static String password;
@@ -111,11 +115,8 @@ public class SignUpController implements Initializable {
             tel = tel_fill.getText();
             
             UserAccount user = new UserAccount(username, password, tel);
-            
-            ObjectDBServices odb = new ObjectDBServices();
-            EntityManager em = odb.openConnection();
-            //EntityManagerFactory emf = Persistence.createEntityManagerFactory("./db/database.odb");
-            //EntityManager em = emf.createEntityManager();
+
+            EntityManager em = SmartReminder.emf.createEntityManager();
 
             // Store 1000 Point objects in the database:
             em.getTransaction().begin();
@@ -125,8 +126,9 @@ public class SignUpController implements Initializable {
             em.getTransaction().commit();
 
             // Close the database connection:
-            odb.closeConnection();
-            FillIdPasswordController.users.add(user);
+            em.close();
+            //emf.close();
+            
             error_pane.setVisible(false);
             SmartReminder.primaryPane.getChildren().clear();
             SmartReminder.primaryPane.getChildren().add(SmartReminder.fillIdPassword);

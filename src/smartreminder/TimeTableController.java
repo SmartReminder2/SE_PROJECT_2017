@@ -109,9 +109,11 @@ public class TimeTableController implements Initializable {
     @FXML
     private Rectangle recTime45;
     @FXML
+    private Rectangle recTime46;
+    @FXML
     private Rectangle recTime47;
     @FXML
-    private Rectangle recTime441;
+    private Rectangle recTime48;
 
     /**
      * Initializes the controller class.
